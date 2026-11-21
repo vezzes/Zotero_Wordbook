@@ -1,0 +1,89 @@
+<linkset></linkset>
+<groupbox>
+  <label><html:h2>Языки</html:h2></label>
+  <description>
+    Язык книги — на нём написан читаемый PDF; подсвечиваются только слова этого языка. Язык перевода — на который переводить.
+    Их же можно быстро сменить кнопками в верхней панели читалки. Встроенный офлайн-словарь и база идиом работают только для направления
+    «английский → русский»; для «русский → английский» нужен онлайн-перевод.
+  </description>
+  <hbox align="center">
+    <label value="Язык книги:"/>
+    <menulist preference="extensions.zotero.wordbook.sourceLang">
+      <menupopup><menuitem label="Английский" value="en"/><menuitem label="Русский" value="ru"/></menupopup>
+    </menulist>
+    <label value="Перевод на:"/>
+    <menulist preference="extensions.zotero.wordbook.targetLang">
+      <menupopup><menuitem label="Английский" value="en"/><menuitem label="Русский" value="ru"/></menupopup>
+    </menulist>
+  </hbox>
+</groupbox>
+
+<groupbox>
+  <label><html:h2>Wordbook — онлайн-перевод (по желанию)</html:h2></label>
+  <description>
+    Офлайн (встроенный словарь и база идиом) работает всегда. Когда есть интернет, перевод можно
+    уточнять онлайн. «Google Translate» бесплатен и не требует ключа: переводит фрагмент без учёта
+    предложения и не объясняет идиомы. Gemini, OpenRouter и DeepSeek переводят по контексту и объясняют идиомы,
+    но нужен ключ API. Gemini и OpenRouter имеют бесплатный уровень (Gemini API не открыт для России без VPN, OpenRouter — ключ на openrouter.ai/keys,
+    бесплатный лимит около 50 запросов в сутки); DeepSeek платный.
+    Выделенный текст отправляется выбранному сервису.
+    Если выбранный сервис не отвечает (нет сети, лимит, неверный ключ), в поповере показывается перевод Google Translate с пометкой
+    «запасной вариант»; причину ошибки покажет кнопка «Проверить подключение». Предложения и абзацы переводятся только онлайн;
+    перевод с учётом окружающего текста даёт только Gemini, OpenRouter или DeepSeek. Google Translate работает без учёта контекста.
+  </description>
+
+  <hbox align="center">
+    <label value="Сервис:"/>
+    <menulist preference="extensions.zotero.wordbook.llmProvider">
+      <menupopup>
+        <menuitem label="Google Translate (бесплатно, без ключа)" value="free"/>
+        <menuitem label="Google Gemini (нужен ключ)" value="gemini"/>
+        <menuitem label="OpenRouter (есть бесплатные модели, нужен ключ)" value="openrouter"/>
+        <menuitem label="DeepSeek / OpenAI-совместимый (нужен ключ)" value="openai"/>
+        <menuitem label="Выключено (только офлайн)" value="off"/>
+      </menupopup>
+    </menulist>
+  </hbox>
+
+  <hbox align="center">
+    <label value="Ключ API (Gemini / OpenRouter / DeepSeek):"/>
+    <html:input type="password" size="40" preference="extensions.zotero.wordbook.llmKey" placeholder="вставьте ключ"/>
+  </hbox>
+
+  <hbox align="center">
+    <label value="Модель (необязательно):"/>
+    <html:input type="text" size="24" preference="extensions.zotero.wordbook.llmModel" placeholder="по умолчанию"/>
+  </hbox>
+
+  <hbox align="center">
+    <label value="Адрес API (для DeepSeek и др.):"/>
+    <html:input type="text" size="36" preference="extensions.zotero.wordbook.llmBaseUrl"/>
+  </hbox>
+
+  <hbox align="center">
+    <button id="wordbook-test-btn" label="Проверить подключение"/>
+    <label id="wordbook-test-result" value=""/>
+  </hbox>
+</groupbox>
+
+<groupbox>
+  <label><html:h2>Подсветка слов в PDF</html:h2></label>
+  <hbox align="center">
+    <label value="Цвет (#rrggbb):"/>
+    <html:input type="text" size="9" preference="extensions.zotero.wordbook.highlightColor"/>
+    <label value="Прозрачность, %:"/>
+    <html:input type="number" min="5" max="100" preference="extensions.zotero.wordbook.highlightOpacity"/>
+  </hbox>
+</groupbox>
+
+<groupbox>
+  <label><html:h2>Anki</html:h2></label>
+  <hbox align="center">
+    <label value="Адрес AnkiConnect:"/>
+    <html:input type="text" size="28" preference="extensions.zotero.wordbook.ankiUrl"/>
+  </hbox>
+  <hbox align="center">
+    <label value="Колода:"/>
+    <html:input type="text" preference="extensions.zotero.wordbook.ankiDeck"/>
+  </hbox>
+</groupbox>

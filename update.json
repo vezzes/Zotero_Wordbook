@@ -1,0 +1,17 @@
+{
+  "addons": {
+    "zotero-wordbook@vezzes.github.io": {
+      "updates": [
+        {
+          "version": "1.0.0",
+          "update_link": "https://github.com/vezzes/Zotero_Wordbook/releases/download/v1.0.0/zotero-wordbook-1.0.0.xpi",
+          "applications": {
+            "zotero": {
+              "strict_min_version": "7.0.0"
+            }
+          }
+        }
+      ]
+    }
+  }
+}
