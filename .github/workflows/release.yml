@@ -1,0 +1,22 @@
+name: Release
+on:
+  push:
+    tags: ["v*"]
+permissions:
+  contents: write
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Check that the tag matches manifest.json
+        run: |
+          V=$(python3 -c "import json;print(json.load(open('manifest.json'))['version'])")
+          [ "v$V" = "${GITHUB_REF_NAME}" ] || { echo "tag ${GITHUB_REF_NAME} != manifest version v$V"; exit 1; }
+      - name: Build .xpi
+        run: ./build.sh
+      - name: Publish release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: dist/*.xpi
+          generate_release_notes: true
