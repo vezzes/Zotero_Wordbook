@@ -1,0 +1,56 @@
+<?xml version="1.0"?>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ru">
+<head>
+  <meta charset="utf-8"/>
+  <title>Wordbook — словарь</title>
+  <style>
+    :root { color-scheme: light dark; --bd: color-mix(in srgb, currentColor 18%, transparent); --mut: color-mix(in srgb, currentColor 55%, transparent); }
+    * { box-sizing: border-box; }
+    body { margin: 0; font: 13px/1.4 system-ui, sans-serif; display: flex; flex-direction: column; height: 100vh; }
+    header { display: flex; gap: 8px; align-items: center; padding: 10px 12px; border-bottom: 1px solid var(--bd); }
+    header input[type=search] { flex: 1; padding: 6px 10px; font: inherit; border: 1px solid var(--bd); border-radius: 6px; background: transparent; color: inherit; }
+    button { font: inherit; padding: 5px 12px; border: 1px solid var(--bd); border-radius: 6px; background: transparent; color: inherit; cursor: pointer; }
+    button:hover:not(:disabled) { background: color-mix(in srgb, currentColor 8%, transparent); }
+    button:disabled { opacity: .45; cursor: default; }
+    button.primary { background: #2f6fed; border-color: #2f6fed; color: #fff; }
+    button.primary:hover:not(:disabled) { background: #2561d6; }
+    main { flex: 1; overflow: auto; }
+    table { width: 100%; border-collapse: collapse; }
+    th { position: sticky; top: 0; text-align: left; padding: 7px 12px; font-weight: 600; font-size: 12px; color: var(--mut); background: Canvas; border-bottom: 1px solid var(--bd); }
+    td { padding: 6px 12px; border-bottom: 1px solid var(--bd); vertical-align: top; }
+    td.word { font-weight: 600; white-space: nowrap; }
+    td input { width: 100%; padding: 3px 6px; font: inherit; border: 1px solid transparent; border-radius: 4px; background: transparent; color: inherit; }
+    td input:hover { border-color: var(--bd); }
+    td input:focus { border-color: #2f6fed; outline: none; }
+    .ctx { font-size: 12px; color: var(--mut); margin-top: 2px; }
+    .src { font-size: 12px; color: var(--mut); }
+    .src a { color: inherit; cursor: pointer; text-decoration: underline dotted; }
+    .badge { display: inline-block; padding: 1px 8px; border-radius: 10px; font-size: 11px; background: color-mix(in srgb, currentColor 10%, transparent); }
+    .badge.done { background: color-mix(in srgb, #2da44e 25%, transparent); }
+    .del { opacity: 0; padding: 2px 8px; }
+    tr:hover .del { opacity: 1; }
+    .empty { padding: 48px 24px; text-align: center; color: var(--mut); }
+    .empty b { color: inherit; display: block; font-size: 15px; margin-bottom: 6px; }
+    footer { padding: 8px 12px; border-top: 1px solid var(--bd); color: var(--mut); font-size: 12px; display: flex; justify-content: space-between; }
+  </style>
+</head>
+<body>
+  <header>
+    <input id="q" type="search" placeholder="Поиск по слову, переводу или книге…" autofocus="true"/>
+    <button id="exportAnki" class="primary">В Anki</button>
+    <button id="exportTsv" title="Сохранить файл для ручного импорта в Anki">В файл (TSV)</button>
+  </header>
+  <main>
+    <table>
+      <thead><tr><th style="width:22%">Слово</th><th>Перевод (можно править)</th><th style="width:24%">Откуда</th><th style="width:90px">Anki</th><th style="width:60px"></th></tr></thead>
+      <tbody id="rows"></tbody>
+    </table>
+    <div id="empty" class="empty" hidden="true">
+      <b>Словарь пока пуст</b>
+      Откройте PDF, выделите слово или выражение и нажмите «＋ В словарь».
+    </div>
+  </main>
+  <footer><span id="count"></span><span id="status"></span></footer>
+  <script src="chrome://wordbook/content/dictionary.js"></script>
+</body>
+</html>

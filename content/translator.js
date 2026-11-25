@@ -33,18 +33,26 @@ Wordbook.Translator = {
   // ====================== offline ======================
   // Returns { text, alternatives, definition, headword, form, source }
   // Errors: DICT_EMPTY | NOT_FOUND (NOT_FOUND has e.hints — translations of the individual words)
-  // The offline dictionary and idiom database exist only for English -> Russian
+  // The offline dictionary is a pack downloaded by the user (see packs.js). English -> Russian additionally has
+  // the idiom database and English word-form rules (enRu), the other pairs use a plain word list (PackDict).
   get offlineSupported() {
     const { src, dst } = Wordbook.langs();
-    return src === "en" && dst === "ru";
+    return Wordbook.Packs.has(src, dst) || this.enRu;
+  },
+
+  // English -> Russian with the full offline logic
+  get enRu() {
+    const { src, dst } = Wordbook.langs();
+    return src === "en" && dst === "ru" && (Wordbook.Packs.has("en", "ru") || Wordbook.Dict.entries.size > 0);
   },
 
   offline(text) {
     if (!this.offlineSupported) {
-      const e = new Error("Для этой пары языков нет офлайн-словаря");
+      const e = new Error("Офлайн-словарь для этой пары не установлен");
       e.code = "NO_OFFLINE";
       throw e;
     }
+    if (!this.enRu) return this._offlinePack(text);
     // 1. the whole selection is a known expression with a Russian equivalent
     const idi = Wordbook.Idioms?.exact(text);
     if (idi?.ru) {
@@ -97,6 +105,33 @@ Wordbook.Translator = {
     };
   },
 
+  // Offline translation from a generic pack (any pair except the full English -> Russian)
+  _offlinePack(text) {
+    if (!Wordbook.Packs.current()) {
+      const e = new Error("Словарь загружается");
+      e.code = "DICT_EMPTY";
+      throw e;
+    }
+    const hit = Wordbook.PackDict.lookup(text);
+    if (!hit || !hit.items.length) {
+      const e = new Error("Слова нет в словаре");
+      e.code = "NOT_FOUND";
+      e.hints = [];
+      throw e;
+    }
+    // Chinese: the reading (pinyin) goes before the translations
+    const head = hit.reading ? `[${hit.reading}] ` : "";
+    return {
+      text: head + hit.items.slice(0, 3).join(", "),
+      alternatives: hit.items.slice(3, 7),
+      definition: "",
+      headword: hit.headword,
+      reading: hit.reading,
+      form: hit.form,
+      source: "pack",
+    };
+  },
+
   // Hints for the individual words of a phrase that is not in the dictionary
   wordHints(text) {
     const hints = [];
@@ -137,10 +172,9 @@ Wordbook.Translator = {
   },
 
   _systemPrompt() {
-    const N = { en: "English", ru: "Russian" };
     const { src, dst } = Wordbook.langs();
-    const S = N[src];
-    const D = N[dst];
+    const S = Wordbook.LANGS[src].prompt;
+    const D = Wordbook.LANGS[dst].prompt;
     return [
       `You are an expert ${S}-to-${D} translator and lexicographer helping a reader of ${S} academic and non-fiction texts who reads in ${D}.`,
       "The user sends JSON: {\"selection\": the exact words the reader highlighted, \"sentence\": the sentence it appears in (may be empty)}.",
@@ -286,7 +320,7 @@ Wordbook.Translator = {
 
   async _googleChunk(chunk) {
     const { src, dst } = Wordbook.langs();
-    const url = `https://translate.googleapis.com/translate_a/single?client=gtx&dt=t&sl=${encodeURIComponent(src)}&tl=${encodeURIComponent(dst)}`;
+    const url = `https://translate.googleapis.com/translate_a/single?client=gtx&dt=t&sl=${encodeURIComponent(Wordbook.LANGS[src].google)}&tl=${encodeURIComponent(Wordbook.LANGS[dst].google)}`;
     let resp;
     try {
       resp = await Zotero.HTTP.request("POST", url, {
@@ -394,7 +428,7 @@ Wordbook.Translator = {
   async _edgeRaw(texts, retried = false) {
     const { src, dst } = Wordbook.langs();
     const token = await this._edgeAuth(retried);
-    const url = `https://api-edge.cognitive.microsofttranslator.com/translate?api-version=3.0&from=${encodeURIComponent(src)}&to=${encodeURIComponent(dst)}`;
+    const url = `https://api-edge.cognitive.microsofttranslator.com/translate?api-version=3.0&from=${encodeURIComponent(Wordbook.LANGS[src].ms)}&to=${encodeURIComponent(Wordbook.LANGS[dst].ms)}`;
     let resp;
     try {
       resp = await Zotero.HTTP.request("POST", url, {
@@ -525,7 +559,7 @@ Wordbook.Translator = {
 
   async _googleRaw(text) {
     const { src, dst } = Wordbook.langs();
-    const url = "https://translate.googleapis.com/translate_a/single?client=gtx&dt=t&sl=" + encodeURIComponent(src) + "&tl=" + encodeURIComponent(dst) + "&q=" + encodeURIComponent(text);
+    const url = "https://translate.googleapis.com/translate_a/single?client=gtx&dt=t&sl=" + encodeURIComponent(Wordbook.LANGS[src].google) + "&tl=" + encodeURIComponent(Wordbook.LANGS[dst].google) + "&q=" + encodeURIComponent(text);
     const resp = await this._gget(url);
     if (resp.status !== 200 || !Array.isArray(resp.response)) throw this._fail("HTTP", `Ошибка сервиса (${resp.status})`);
     return (Array.isArray(resp.response[0]) ? resp.response[0] : []).map((seg) => (Array.isArray(seg) ? seg[0] || "" : "")).join("").trim();
@@ -535,7 +569,7 @@ Wordbook.Translator = {
     const { src, dst } = Wordbook.langs();
     const url =
       "https://translate.googleapis.com/translate_a/single?client=gtx&dt=t&dt=bd&sl=" +
-      encodeURIComponent(src) + "&tl=" + encodeURIComponent(dst) + "&q=" + encodeURIComponent(text);
+      encodeURIComponent(Wordbook.LANGS[src].google) + "&tl=" + encodeURIComponent(Wordbook.LANGS[dst].google) + "&q=" + encodeURIComponent(text);
     const resp = await this._gget(url);
     if (resp.status === 429) throw this._fail("RATE", "Сервис временно ограничил запросы, попробуйте позже");
     if (resp.status !== 200 || !Array.isArray(resp.response)) {
@@ -695,8 +729,7 @@ Wordbook.Translator = {
   // For the «Check» button in the settings
   async test() {
     try {
-      const SAMPLE = { en: ["break the ice", "She told a joke to break the ice at the meeting."], ru: ["разбить лёд", "Он рассказал шутку, чтобы разбить лёд."] };
-      const [word, sentence] = SAMPLE[Wordbook.langs().src];
+      const [word, sentence] = Wordbook.LANGS[Wordbook.langs().src].sample;
       const r = await this._request(word, sentence, false, true);
       return { ok: true, message: `Работает: «${r.text}» (${this.providerLabel}${this.provider === "free" ? "" : ", " + this._model()})` };
     } catch (e) {

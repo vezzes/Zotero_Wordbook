@@ -1,10 +1,12 @@
 /* global Wordbook */
-// Morphology works the same for English and Russian: a word is reduced to its stem (Snowball stemmer),
-// and words and expressions are compared by stems. So «appeared to» finds «appear to», «книгу» finds «книга».
+// Morphology works the same for the Snowball languages (English, Russian, German, French, Spanish, Portuguese):
+// a word is reduced to its stem, and words and expressions are compared by stems.
+// So «appeared to» finds «appear to», «книгу» finds «книга», «Häuser» finds «Haus».
 // Short words (up to 4 letters) are compared as is, to avoid accidental matches.
+// Chinese has no spaces and no inflection: a saved word is searched in the text as a plain substring (longest first).
 
 Wordbook.Morph = {
-  _ALG: { en: "english", ru: "russian" },
+  _ALG: { en: "english", ru: "russian", de: "german", fr: "french", es: "spanish", pt: "portuguese" },
   _stemmers: {},
   _cache: {},
   _TOKEN: /[\p{L}\p{M}]+(?:['\u2019][\p{L}\p{M}]+)*/gu,
@@ -16,8 +18,10 @@ Wordbook.Morph = {
     if (r !== undefined) return r;
     let w = String(word).toLowerCase().normalize("NFC");
     if (lang === "ru") w = w.replace(/ё/g, "е");
-    w = w.replace(/['\u2019]s$/, "");
-    if (w.length < 4) {
+    if (lang === "en") w = w.replace(/['\u2019]s$/, "");
+    if (lang === "zh" || !this._ALG[lang]) {
+      r = w; // Chinese and languages without a stemmer: the word as is
+    } else if (w.length < 4) {
       r = w;
     } else {
       try {
@@ -56,7 +60,13 @@ Wordbook.Morph = {
   },
 
   // entries: [{ id, word }] of one language -> Map(stem of the first word -> [{ stems, id }]), longest expressions first
+  // Chinese: { zh: [{ word, id }] } sorted by length
   buildMatcher(entries, lang) {
+    if (lang === "zh") {
+      const list = entries.map((e) => ({ word: String(e.word).normalize("NFKC").replace(/\s+/g, ""), id: e.id })).filter((e) => e.word);
+      list.sort((a, b) => b.word.length - a.word.length);
+      return { zh: list };
+    }
     const map = new Map();
     for (const e of entries) {
       const stems = this.stems(e.word, lang);
@@ -71,6 +81,7 @@ Wordbook.Morph = {
 
   // All occurrences of dictionary words in the text: [{ start, end, id }]
   findAll(text, matcher, lang) {
+    if (lang === "zh") return this._findAllSubstring(text, matcher.zh || []);
     const toks = this.tokens(text);
     const st = toks.map((t) => this.stem(t.w, lang));
     const out = [];
@@ -101,5 +112,21 @@ Wordbook.Morph = {
       }
     }
     return out;
+  },
+
+  // Chinese: literal occurrences, the longest words first, without overlaps
+  _findAllSubstring(text, list) {
+    const out = [];
+    const taken = new Uint8Array(text.length);
+    for (const { word, id } of list) {
+      for (let at = text.indexOf(word); at >= 0; at = text.indexOf(word, at + word.length)) {
+        let free = true;
+        for (let k = at; k < at + word.length; k++) if (taken[k]) free = false;
+        if (!free) continue;
+        taken.fill(1, at, at + word.length);
+        out.push({ start: at, end: at + word.length, id });
+      }
+    }
+    return out.sort((a, b) => a.start - b.start);
   },
 };

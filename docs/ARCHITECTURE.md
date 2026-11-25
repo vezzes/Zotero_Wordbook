@@ -43,8 +43,9 @@ Dependencies are one-directional: `reader` and `ui` know about `store`, `transla
 | `manifest.json`, `bootstrap.js`, `prefs.js` | Manifest (WebExtension style), lifecycle, default preference values |
 | `content/wordbook.js` | The global `Wordbook` object: preferences, event bus, `normalize()`, `stems()`, `debounce()` |
 | `content/store.js` | The dictionary: `add / update / remove / lookup / pendingAnki / markExported`, atomic JSON saving |
-| `content/data/` | Bundled data: `dict-basic.json` (EN→RU dictionary, ~44k words), `idioms.json` (~39k expressions) and the license texts |
-| `content/dict.js` | Dictionaries: the bundled basic one plus (optionally) a loaded StarDict; word and expression lookup |
+| `packs-src/`, `licenses/` | Sources of the en-ru pack and the license texts (not in the .xpi). Formerly bundled data: `dict-basic.json` (EN→RU dictionary, ~44k words), `idioms.json` (~39k expressions) and the license texts |
+| `content/packs.js` | Offline dictionary packs: catalog, download with a checksum, storage in `<data dir>/wordbook/packs/`, loading of the current pair (`Wordbook.Packs`); lookup in a generic pack (`Wordbook.PackDict`) |
+| `content/dict.js` | The English → Russian dictionary logic (from the `en-ru` pack) plus (optionally) a loaded StarDict; word and expression lookup |
 | `content/morph.js`, `content/lib/snowball.js` | Morphology for en/ru: words are reduced to stems (Snowball stemmers, ISC), and words and expressions are compared by stems; used in highlighting, entry lookup and context masking |
 | `content/lemma.js` | Reduces English word forms to the base form (rules + a table of irregular forms) |
 | `content/idioms.js` | Recognises idioms, phrasal verbs and fixed expressions in the selection and in the sentence |
@@ -56,7 +57,7 @@ Dependencies are one-directional: `reader` and `ui` know about `store`, `transla
 | `content/anki.js` | AnkiConnect: creating the deck/note type, `addNotes`, duplicate lookup; TSV export |
 | `content/ui.js` | The "Tools" menu items and opening the dictionary window |
 | `content/preferences.xhtml/.js` | The settings pane: online translation (service, key, test), highlight colour, Anki |
-| `tools/build_data.py`, `tools/idioms-curated.tsv` | Building the bundled data; the author's list of idioms and fixed expressions |
+| `tools/build_data.py`, `tools/build_packs.py`, `tools/idioms-curated.tsv` | Building the en-ru source data and all dictionary packs; the author's list of idioms and fixed expressions |
 
 ## Data model
 
@@ -117,9 +118,9 @@ English and Russian are supported in both directions (EN→RU and RU→EN). The 
 
 **Idiom labels.** Offline: the whole selection is an expression; the selection contains an expression; the selected word is part of an expression in the sentence («Возможно, часть выражения…», "possibly part of the expression…"). Online, the model's judgement is added to this.
 
-**Optional:** load your own StarDict dictionary (for example, Mueller's): Tools → «Wordbook: загрузить словарь» (load dictionary). It takes priority over the bundled one.
+**Optional:** load your own StarDict dictionary (for example, Mueller's): Tools → «Wordbook: загрузить словарь» (load dictionary). It takes priority over the `en-ru` pack.
 
-**Data licenses.** The bundled dictionary is a derivative work of OpenRussian (CC BY-SA 4.0), so the `dict-basic.json` file is distributed under the same terms; WordNet is under the Princeton University license. The license texts are in `content/data/`. Rebuilding the data: `python3 tools/build_data.py <csv_openrussian> <wordnet_dict>`.
+**Data licenses.** The packs derived from OpenRussian and CC-CEDICT are CC BY-SA 4.0, FreeDict ones GPL, WordNet is under the Princeton University license; the texts are in `licenses/` and the license of each pack is in the pack and in the catalog. Rebuilding the en-ru source: `python3 tools/build_data.py <csv_openrussian> <wordnet_dict>`; all packs: `python3 tools/build_packs.py`.
 
 ## Development
 
@@ -135,7 +136,7 @@ English and Russian are supported in both directions (EN→RU and RU→EN). The 
 1. **Internal reader APIs.** `reader._internalReader._primaryView`, `view._iframeWindow`, `view._pdfPages[i].chars`, `PDFViewerApplication.pdfViewer.getPageView()`, `Zotero.Reader._readers` are undocumented (they exist in the Zotero sources but may change). Everything is collected in `reader.js` and `highlighter.js`.
 2. **PDF highlighting** is drawn as a `.wbOverlay` layer inside `div.page`: check page rotation, two-page mode and the dark theme.
 3. **Free Google Translate is an unofficial endpoint**: it may change, limit frequent requests (429) or be unavailable in some regions; then the offline translation remains, with a note. **Online translation has not been tested against real servers**: the requests were checked against the Gemini and DeepSeek documentation and tested on a mock server (key errors, model 404, no JSON mode, no network). Model names change; if the default model becomes obsolete, the plugin picks the current Flash model of Gemini; for DeepSeek the name can be set in the settings.
-4. **Loading the bundled data** goes through `Zotero.File.getContentsFromURL("chrome://wordbook/…")` (the path is registered in `bootstrap.js`); opening the settings uses `Zotero.Utilities.Internal.openPreferences("wordbook-prefpane")`. Both calls should be checked on 10.0.6.
+4. **Dictionary packs** are read and written with `IOUtils` and downloaded with `Zotero.HTTP.request(..., {responseType: "arraybuffer"})`; the SHA-256 check uses `crypto.subtle` (or XPCOM `nsICryptoHash`). Not verified in real Zotero yet. Opening the settings uses `Zotero.Utilities.Internal.openPreferences("wordbook-prefpane")`. Both calls should be checked on 10.0.6.
 5. **Quality of the basic dictionary** is limited by its source: it is a "Russian to English" dictionary turned around. For stronger translations there is the online mode and (optionally) loading Mueller.
 6. **Offline idioms**: WordNet covers idioms incompletely, so the author's list was added; rare expressions are not recognised offline. "Weak" compound nouns (for example, «ice cream») are shown only when selected whole.
 7. **The API key** is stored in Zotero's preferences in plain text (like other settings).
@@ -143,9 +144,17 @@ English and Russian are supported in both directions (EN→RU and RU→EN). The 
 
 **Free Google Translate with context.** For a word with a known sentence, the word is put in square brackets, the whole sentence is translated, and whatever ended up in the brackets is extracted from the translation (`Translator._googleInContext`). If that fails, the plain word translation is used.
 
-**Base form for Russian.** `Lemma.ruBase()` picks the base form from the list of Russian words in the bundled dictionary (a shared Snowball stem + the longest common prefix); the translation is online. If the online model returned a `lemma`, it is offered too (for any language). The selection is heuristic and sometimes wrong («людям» → «люд»).
+**Base form for Russian.** `Lemma.ruBase()` picks the base form from the headwords of the downloaded `ru-*` pack (a shared Snowball stem + the longest common prefix); the `ru-*` packs also contain inflected forms as `→headword` redirects, which are tried first; the translation is online. If the online model returned a `lemma`, it is offered too (for any language). The selection is heuristic and sometimes wrong («людям» → «люд»).
 **Google Translate:** both requests (the word and the sentence with brackets) run in parallel; on a network failure or a 5xx response, one retry.
 
 **Dictionary form of the translation.** The translation of a word in context arrives in the form used in the sentence («subpar tools» → «некачественные»). The dictionary needs the base form: Gemini/OpenRouter/DeepSeek are asked to give the translation of the single word in dictionary form (context only affects the choice of meaning); for Google the form is derived by rules (`Lemma.ruDictForm`: adjective endings, then the dictionary word list).
 
 **Fallback free service.** If Google Translate is unavailable (request limit, 5xx error, no connection), words and fragments are translated by Microsoft Translator through the same public access the Edge browser uses (`Translator._edgeRaw`: token from `edge.microsoft.com/translate/auth`, translation from `api-edge.cognitive.microsofttranslator.com`). No key is needed; the caption says «Microsoft Translator (запасной вариант)» (fallback). It also works as a fallback for Gemini/OpenRouter/DeepSeek. The address is unofficial and may change.
+
+## Languages and offline packs (1.1.0)
+
+- **Languages**: `Wordbook.LANGS` (en, zh, de, fr, es, pt, ru) holds the interface name, the name for translation prompts and the language codes of Google (`google`) and Microsoft (`ms`) for each language. Any two different languages can be paired.
+- **Matching**: Snowball stemmers for en, ru, de, fr, es, pt (`content/lib/snowball.js`); Chinese is matched as a plain substring, the longest saved word first (`Morph._findAllSubstring`). A language without a stemmer would be compared as written.
+- **Packs**: a pack is `{format, id, src, dst, version, name, license, source, entries, [idioms], [note]}`, `entries` maps a lowercase key to `"t1|t2|…"`, `"→headword"` (an inflected form) or a value starting with an item `"~reading"` (pinyin). The pack of the current pair is loaded by `Packs.prepare()` (also when the language preferences change). en→ru keeps the richer logic (`Dict`, `Idioms`, English word-form rules); the other pairs use `PackDict.lookup` (exact key, then stem index of the headwords).
+- **Catalog and hosting**: `catalog.json` and the packs are release assets under the tag `dictionaries` of the repository (`Packs.DEFAULT_URL`; the `packsUrl` preference overrides it). `tools/build_packs.py` builds them; the `Build dictionaries` workflow publishes them.
+- **No pivot through English**: offline translation for a pair needs a dictionary for exactly that pair; otherwise only online translation works.

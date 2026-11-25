@@ -1,0 +1,16 @@
+{
+  "manifest_version": 2,
+  "name": "Zotero Wordbook",
+  "version": "1.0.0",
+  "description": "Личный словарь для PDF в Zotero: выделил слово — получил перевод, добавил в словарь. Слова подсвечиваются во всех книгах, перевод по наведению. Английский и русский, офлайн-словарь EN→RU, экспорт в Anki без дублей.",
+  "author": "vezzes",
+  "applications": {
+    "zotero": {
+      "id": "zotero-wordbook@vezzes.github.io",
+      "update_url": "https://raw.githubusercontent.com/vezzes/Zotero_Wordbook/main/update.json",
+      "strict_min_version": "7.0.0",
+      "strict_max_version": "10.*"
+    }
+  },
+  "homepage_url": "https://github.com/vezzes/Zotero_Wordbook"
+}

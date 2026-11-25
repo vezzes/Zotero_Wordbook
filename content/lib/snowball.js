@@ -1,4 +1,4 @@
-/* snowball-stemmers 0.6.0 (ISC, Oleg Mazko) — Snowball stemmers (only English and Russian are kept). Wrapped in Wordbook.Snowball for loading via loadSubScript. */
+/* snowball-stemmers 0.6.0 (ISC, Oleg Mazko) — Snowball stemmers (English, Russian, German, French, Spanish, Portuguese are kept). Wrapped in Wordbook.Snowball for loading via loadSubScript. */
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
 Wordbook.Snowball = (function () {
   var exports = {};
@@ -2136,6 +2136,2951 @@ Wordbook.Snowball = (function () {
         return englishStemmer;
     }(SnowballStemmer);
 
+    var frenchStemmer = function (_SnowballStemmer10) {
+        _inherits(frenchStemmer, _SnowballStemmer10);
+
+        function frenchStemmer() {
+            _classCallCheck(this, frenchStemmer);
+
+            return _possibleConstructorReturn(this, Object.getPrototypeOf(frenchStemmer).apply(this, arguments));
+        }
+
+        _createClass(frenchStemmer, [{
+            key: 'r_prelude$esjava$0',
+            value: function r_prelude$esjava$0() {
+                var v_1 = undefined;
+                var v_2 = undefined;
+                var v_3 = undefined;
+                var v_4 = undefined;
+
+                replab0: while (true) {
+                    v_1 = this.cursor;
+
+                    lab1: do {
+                        golab2: while (true) {
+                            v_2 = this.cursor;
+
+                            lab3: do {
+                                lab4: do {
+                                    v_3 = this.cursor;
+
+                                    lab5: do {
+                                        if (!this.in_grouping$esjava$3(frenchStemmer.g_v, 97, 251)) {
+                                            break lab5;
+                                        }
+
+                                        this.bra = this.cursor;
+
+                                        lab6: do {
+                                            v_4 = this.cursor;
+
+                                            lab7: do {
+                                                if (!this.eq_s$esjava$1("u")) {
+                                                    break lab7;
+                                                }
+
+                                                this.ket = this.cursor;
+
+                                                if (!this.in_grouping$esjava$3(frenchStemmer.g_v, 97, 251)) {
+                                                    break lab7;
+                                                }
+
+                                                this.slice_from$esjava$1("U");
+                                                break lab6;
+                                            } while (false);
+
+                                            this.cursor = v_4;
+
+                                            lab8: do {
+                                                if (!this.eq_s$esjava$1("i")) {
+                                                    break lab8;
+                                                }
+
+                                                this.ket = this.cursor;
+
+                                                if (!this.in_grouping$esjava$3(frenchStemmer.g_v, 97, 251)) {
+                                                    break lab8;
+                                                }
+
+                                                this.slice_from$esjava$1("I");
+                                                break lab6;
+                                            } while (false);
+
+                                            this.cursor = v_4;
+
+                                            if (!this.eq_s$esjava$1("y")) {
+                                                break lab5;
+                                            }
+
+                                            this.ket = this.cursor;
+                                            this.slice_from$esjava$1("Y");
+                                        } while (false);
+
+                                        break lab4;
+                                    } while (false);
+
+                                    this.cursor = v_3;
+
+                                    lab9: do {
+                                        this.bra = this.cursor;
+
+                                        if (!this.eq_s$esjava$1("y")) {
+                                            break lab9;
+                                        }
+
+                                        this.ket = this.cursor;
+
+                                        if (!this.in_grouping$esjava$3(frenchStemmer.g_v, 97, 251)) {
+                                            break lab9;
+                                        }
+
+                                        this.slice_from$esjava$1("Y");
+                                        break lab4;
+                                    } while (false);
+
+                                    this.cursor = v_3;
+
+                                    if (!this.eq_s$esjava$1("q")) {
+                                        break lab3;
+                                    }
+
+                                    this.bra = this.cursor;
+
+                                    if (!this.eq_s$esjava$1("u")) {
+                                        break lab3;
+                                    }
+
+                                    this.ket = this.cursor;
+                                    this.slice_from$esjava$1("U");
+                                } while (false);
+
+                                this.cursor = v_2;
+                                break golab2;
+                            } while (false);
+
+                            this.cursor = v_2;
+
+                            if (this.cursor >= this.limit) {
+                                break lab1;
+                            }
+
+                            this.cursor++;
+                        }
+
+                        continue replab0;
+                    } while (false);
+
+                    this.cursor = v_1;
+                    break replab0;
+                }
+
+                return true;
+            }
+        }, {
+            key: 'r_mark_regions$esjava$0',
+            value: function r_mark_regions$esjava$0() {
+                var v_1 = undefined;
+                var v_2 = undefined;
+                var v_4 = undefined;
+                this.I_pV = this.limit;
+                this.I_p1 = this.limit;
+                this.I_p2 = this.limit;
+                v_1 = this.cursor;
+
+                lab0: do {
+                    lab1: do {
+                        v_2 = this.cursor;
+
+                        lab2: do {
+                            if (!this.in_grouping$esjava$3(frenchStemmer.g_v, 97, 251)) {
+                                break lab2;
+                            }
+
+                            if (!this.in_grouping$esjava$3(frenchStemmer.g_v, 97, 251)) {
+                                break lab2;
+                            }
+
+                            if (this.cursor >= this.limit) {
+                                break lab2;
+                            }
+
+                            this.cursor++;
+                            break lab1;
+                        } while (false);
+
+                        this.cursor = v_2;
+
+                        lab3: do {
+                            if (this.find_among$esjava$1(frenchStemmer.a_0) === 0) {
+                                break lab3;
+                            }
+
+                            break lab1;
+                        } while (false);
+
+                        this.cursor = v_2;
+
+                        if (this.cursor >= this.limit) {
+                            break lab0;
+                        }
+
+                        this.cursor++;
+
+                        golab4: while (true) {
+                            lab5: do {
+                                if (!this.in_grouping$esjava$3(frenchStemmer.g_v, 97, 251)) {
+                                    break lab5;
+                                }
+
+                                break golab4;
+                            } while (false);
+
+                            if (this.cursor >= this.limit) {
+                                break lab0;
+                            }
+
+                            this.cursor++;
+                        }
+                    } while (false);
+
+                    this.I_pV = this.cursor;
+                } while (false);
+
+                this.cursor = v_1;
+                v_4 = this.cursor;
+
+                lab6: do {
+                    golab7: while (true) {
+                        lab8: do {
+                            if (!this.in_grouping$esjava$3(frenchStemmer.g_v, 97, 251)) {
+                                break lab8;
+                            }
+
+                            break golab7;
+                        } while (false);
+
+                        if (this.cursor >= this.limit) {
+                            break lab6;
+                        }
+
+                        this.cursor++;
+                    }
+
+                    golab9: while (true) {
+                        lab10: do {
+                            if (!this.out_grouping$esjava$3(frenchStemmer.g_v, 97, 251)) {
+                                break lab10;
+                            }
+
+                            break golab9;
+                        } while (false);
+
+                        if (this.cursor >= this.limit) {
+                            break lab6;
+                        }
+
+                        this.cursor++;
+                    }
+
+                    this.I_p1 = this.cursor;
+
+                    golab11: while (true) {
+                        lab12: do {
+                            if (!this.in_grouping$esjava$3(frenchStemmer.g_v, 97, 251)) {
+                                break lab12;
+                            }
+
+                            break golab11;
+                        } while (false);
+
+                        if (this.cursor >= this.limit) {
+                            break lab6;
+                        }
+
+                        this.cursor++;
+                    }
+
+                    golab13: while (true) {
+                        lab14: do {
+                            if (!this.out_grouping$esjava$3(frenchStemmer.g_v, 97, 251)) {
+                                break lab14;
+                            }
+
+                            break golab13;
+                        } while (false);
+
+                        if (this.cursor >= this.limit) {
+                            break lab6;
+                        }
+
+                        this.cursor++;
+                    }
+
+                    this.I_p2 = this.cursor;
+                } while (false);
+
+                this.cursor = v_4;
+                return true;
+            }
+        }, {
+            key: 'r_postlude$esjava$0',
+            value: function r_postlude$esjava$0() {
+                var among_var = undefined;
+                var v_1 = undefined;
+
+                replab0: while (true) {
+                    v_1 = this.cursor;
+
+                    lab1: do {
+                        this.bra = this.cursor;
+                        among_var = this.find_among$esjava$1(frenchStemmer.a_1);
+
+                        if (among_var === 0) {
+                            break lab1;
+                        }
+
+                        this.ket = this.cursor;
+
+                        switch (among_var) {
+                            case 0:
+                                break lab1;
+
+                            case 1:
+                                this.slice_from$esjava$1("i");
+                                break;
+
+                            case 2:
+                                this.slice_from$esjava$1("u");
+                                break;
+
+                            case 3:
+                                this.slice_from$esjava$1("y");
+                                break;
+
+                            case 4:
+                                if (this.cursor >= this.limit) {
+                                    break lab1;
+                                }
+
+                                this.cursor++;
+                                break;
+                        }
+
+                        continue replab0;
+                    } while (false);
+
+                    this.cursor = v_1;
+                    break replab0;
+                }
+
+                return true;
+            }
+        }, {
+            key: 'r_RV$esjava$0',
+            value: function r_RV$esjava$0() {
+                if (!(this.I_pV <= this.cursor)) {
+                    return false;
+                }
+
+                return true;
+            }
+        }, {
+            key: 'r_R1$esjava$0',
+            value: function r_R1$esjava$0() {
+                if (!(this.I_p1 <= this.cursor)) {
+                    return false;
+                }
+
+                return true;
+            }
+        }, {
+            key: 'r_R2$esjava$0',
+            value: function r_R2$esjava$0() {
+                if (!(this.I_p2 <= this.cursor)) {
+                    return false;
+                }
+
+                return true;
+            }
+        }, {
+            key: 'r_standard_suffix$esjava$0',
+            value: function r_standard_suffix$esjava$0() {
+                var among_var = undefined;
+                var v_1 = undefined;
+                var v_2 = undefined;
+                var v_3 = undefined;
+                var v_4 = undefined;
+                var v_5 = undefined;
+                var v_6 = undefined;
+                var v_7 = undefined;
+                var v_8 = undefined;
+                var v_9 = undefined;
+                var v_10 = undefined;
+                var v_11 = undefined;
+                this.ket = this.cursor;
+                among_var = this.find_among_b$esjava$1(frenchStemmer.a_4);
+
+                if (among_var === 0) {
+                    return false;
+                }
+
+                this.bra = this.cursor;
+
+                switch (among_var) {
+                    case 0:
+                        return false;
+
+                    case 1:
+                        if (!this.r_R2$esjava$0()) {
+                            return false;
+                        }
+
+                        this.slice_del$esjava$0();
+                        break;
+
+                    case 2:
+                        if (!this.r_R2$esjava$0()) {
+                            return false;
+                        }
+
+                        this.slice_del$esjava$0();
+                        v_1 = this.limit - this.cursor;
+
+                        lab0: do {
+                            this.ket = this.cursor;
+
+                            if (!this.eq_s_b$esjava$1("ic")) {
+                                this.cursor = this.limit - v_1;
+                                break lab0;
+                            }
+
+                            this.bra = this.cursor;
+
+                            lab1: do {
+                                v_2 = this.limit - this.cursor;
+
+                                lab2: do {
+                                    if (!this.r_R2$esjava$0()) {
+                                        break lab2;
+                                    }
+
+                                    this.slice_del$esjava$0();
+                                    break lab1;
+                                } while (false);
+
+                                this.cursor = this.limit - v_2;
+                                this.slice_from$esjava$1("iqU");
+                            } while (false);
+                        } while (false);
+
+                        break;
+
+                    case 3:
+                        if (!this.r_R2$esjava$0()) {
+                            return false;
+                        }
+
+                        this.slice_from$esjava$1("log");
+                        break;
+
+                    case 4:
+                        if (!this.r_R2$esjava$0()) {
+                            return false;
+                        }
+
+                        this.slice_from$esjava$1("u");
+                        break;
+
+                    case 5:
+                        if (!this.r_R2$esjava$0()) {
+                            return false;
+                        }
+
+                        this.slice_from$esjava$1("ent");
+                        break;
+
+                    case 6:
+                        if (!this.r_RV$esjava$0()) {
+                            return false;
+                        }
+
+                        this.slice_del$esjava$0();
+                        v_3 = this.limit - this.cursor;
+
+                        lab3: do {
+                            this.ket = this.cursor;
+                            among_var = this.find_among_b$esjava$1(frenchStemmer.a_2);
+
+                            if (among_var === 0) {
+                                this.cursor = this.limit - v_3;
+                                break lab3;
+                            }
+
+                            this.bra = this.cursor;
+
+                            switch (among_var) {
+                                case 0:
+                                    this.cursor = this.limit - v_3;
+                                    break lab3;
+
+                                case 1:
+                                    if (!this.r_R2$esjava$0()) {
+                                        this.cursor = this.limit - v_3;
+                                        break lab3;
+                                    }
+
+                                    this.slice_del$esjava$0();
+                                    this.ket = this.cursor;
+
+                                    if (!this.eq_s_b$esjava$1("at")) {
+                                        this.cursor = this.limit - v_3;
+                                        break lab3;
+                                    }
+
+                                    this.bra = this.cursor;
+
+                                    if (!this.r_R2$esjava$0()) {
+                                        this.cursor = this.limit - v_3;
+                                        break lab3;
+                                    }
+
+                                    this.slice_del$esjava$0();
+                                    break;
+
+                                case 2:
+                                    lab4: do {
+                                        v_4 = this.limit - this.cursor;
+
+                                        lab5: do {
+                                            if (!this.r_R2$esjava$0()) {
+                                                break lab5;
+                                            }
+
+                                            this.slice_del$esjava$0();
+                                            break lab4;
+                                        } while (false);
+
+                                        this.cursor = this.limit - v_4;
+
+                                        if (!this.r_R1$esjava$0()) {
+                                            this.cursor = this.limit - v_3;
+                                            break lab3;
+                                        }
+
+                                        this.slice_from$esjava$1("eux");
+                                    } while (false);
+
+                                    break;
+
+                                case 3:
+                                    if (!this.r_R2$esjava$0()) {
+                                        this.cursor = this.limit - v_3;
+                                        break lab3;
+                                    }
+
+                                    this.slice_del$esjava$0();
+                                    break;
+
+                                case 4:
+                                    if (!this.r_RV$esjava$0()) {
+                                        this.cursor = this.limit - v_3;
+                                        break lab3;
+                                    }
+
+                                    this.slice_from$esjava$1("i");
+                                    break;
+                            }
+                        } while (false);
+
+                        break;
+
+                    case 7:
+                        if (!this.r_R2$esjava$0()) {
+                            return false;
+                        }
+
+                        this.slice_del$esjava$0();
+                        v_5 = this.limit - this.cursor;
+
+                        lab6: do {
+                            this.ket = this.cursor;
+                            among_var = this.find_among_b$esjava$1(frenchStemmer.a_3);
+
+                            if (among_var === 0) {
+                                this.cursor = this.limit - v_5;
+                                break lab6;
+                            }
+
+                            this.bra = this.cursor;
+
+                            switch (among_var) {
+                                case 0:
+                                    this.cursor = this.limit - v_5;
+                                    break lab6;
+
+                                case 1:
+                                    lab7: do {
+                                        v_6 = this.limit - this.cursor;
+
+                                        lab8: do {
+                                            if (!this.r_R2$esjava$0()) {
+                                                break lab8;
+                                            }
+
+                                            this.slice_del$esjava$0();
+                                            break lab7;
+                                        } while (false);
+
+                                        this.cursor = this.limit - v_6;
+                                        this.slice_from$esjava$1("abl");
+                                    } while (false);
+
+                                    break;
+
+                                case 2:
+                                    lab9: do {
+                                        v_7 = this.limit - this.cursor;
+
+                                        lab10: do {
+                                            if (!this.r_R2$esjava$0()) {
+                                                break lab10;
+                                            }
+
+                                            this.slice_del$esjava$0();
+                                            break lab9;
+                                        } while (false);
+
+                                        this.cursor = this.limit - v_7;
+                                        this.slice_from$esjava$1("iqU");
+                                    } while (false);
+
+                                    break;
+
+                                case 3:
+                                    if (!this.r_R2$esjava$0()) {
+                                        this.cursor = this.limit - v_5;
+                                        break lab6;
+                                    }
+
+                                    this.slice_del$esjava$0();
+                                    break;
+                            }
+                        } while (false);
+
+                        break;
+
+                    case 8:
+                        if (!this.r_R2$esjava$0()) {
+                            return false;
+                        }
+
+                        this.slice_del$esjava$0();
+                        v_8 = this.limit - this.cursor;
+
+                        lab11: do {
+                            this.ket = this.cursor;
+
+                            if (!this.eq_s_b$esjava$1("at")) {
+                                this.cursor = this.limit - v_8;
+                                break lab11;
+                            }
+
+                            this.bra = this.cursor;
+
+                            if (!this.r_R2$esjava$0()) {
+                                this.cursor = this.limit - v_8;
+                                break lab11;
+                            }
+
+                            this.slice_del$esjava$0();
+                            this.ket = this.cursor;
+
+                            if (!this.eq_s_b$esjava$1("ic")) {
+                                this.cursor = this.limit - v_8;
+                                break lab11;
+                            }
+
+                            this.bra = this.cursor;
+
+                            lab12: do {
+                                v_9 = this.limit - this.cursor;
+
+                                lab13: do {
+                                    if (!this.r_R2$esjava$0()) {
+                                        break lab13;
+                                    }
+
+                                    this.slice_del$esjava$0();
+                                    break lab12;
+                                } while (false);
+
+                                this.cursor = this.limit - v_9;
+                                this.slice_from$esjava$1("iqU");
+                            } while (false);
+                        } while (false);
+
+                        break;
+
+                    case 9:
+                        this.slice_from$esjava$1("eau");
+                        break;
+
+                    case 10:
+                        if (!this.r_R1$esjava$0()) {
+                            return false;
+                        }
+
+                        this.slice_from$esjava$1("al");
+                        break;
+
+                    case 11:
+                        lab14: do {
+                            v_10 = this.limit - this.cursor;
+
+                            lab15: do {
+                                if (!this.r_R2$esjava$0()) {
+                                    break lab15;
+                                }
+
+                                this.slice_del$esjava$0();
+                                break lab14;
+                            } while (false);
+
+                            this.cursor = this.limit - v_10;
+
+                            if (!this.r_R1$esjava$0()) {
+                                return false;
+                            }
+
+                            this.slice_from$esjava$1("eux");
+                        } while (false);
+
+                        break;
+
+                    case 12:
+                        if (!this.r_R1$esjava$0()) {
+                            return false;
+                        }
+
+                        if (!this.out_grouping_b$esjava$3(frenchStemmer.g_v, 97, 251)) {
+                            return false;
+                        }
+
+                        this.slice_del$esjava$0();
+                        break;
+
+                    case 13:
+                        if (!this.r_RV$esjava$0()) {
+                            return false;
+                        }
+
+                        this.slice_from$esjava$1("ant");
+                        return false;
+
+                    case 14:
+                        if (!this.r_RV$esjava$0()) {
+                            return false;
+                        }
+
+                        this.slice_from$esjava$1("ent");
+                        return false;
+
+                    case 15:
+                        v_11 = this.limit - this.cursor;
+
+                        if (!this.in_grouping_b$esjava$3(frenchStemmer.g_v, 97, 251)) {
+                            return false;
+                        }
+
+                        if (!this.r_RV$esjava$0()) {
+                            return false;
+                        }
+
+                        this.cursor = this.limit - v_11;
+                        this.slice_del$esjava$0();
+                        return false;
+                }
+
+                return true;
+            }
+        }, {
+            key: 'r_i_verb_suffix$esjava$0',
+            value: function r_i_verb_suffix$esjava$0() {
+                var among_var = undefined;
+                var v_1 = undefined;
+                var v_2 = undefined;
+                v_1 = this.limit - this.cursor;
+
+                if (this.cursor < this.I_pV) {
+                    return false;
+                }
+
+                this.cursor = this.I_pV;
+                v_2 = this.limit_backward;
+                this.limit_backward = this.cursor;
+                this.cursor = this.limit - v_1;
+                this.ket = this.cursor;
+                among_var = this.find_among_b$esjava$1(frenchStemmer.a_5);
+
+                if (among_var === 0) {
+                    this.limit_backward = v_2;
+                    return false;
+                }
+
+                this.bra = this.cursor;
+
+                switch (among_var) {
+                    case 0:
+                        this.limit_backward = v_2;
+                        return false;
+
+                    case 1:
+                        if (!this.out_grouping_b$esjava$3(frenchStemmer.g_v, 97, 251)) {
+                            this.limit_backward = v_2;
+                            return false;
+                        }
+
+                        this.slice_del$esjava$0();
+                        break;
+                }
+
+                this.limit_backward = v_2;
+                return true;
+            }
+        }, {
+            key: 'r_verb_suffix$esjava$0',
+            value: function r_verb_suffix$esjava$0() {
+                var among_var = undefined;
+                var v_1 = undefined;
+                var v_2 = undefined;
+                var v_3 = undefined;
+                v_1 = this.limit - this.cursor;
+
+                if (this.cursor < this.I_pV) {
+                    return false;
+                }
+
+                this.cursor = this.I_pV;
+                v_2 = this.limit_backward;
+                this.limit_backward = this.cursor;
+                this.cursor = this.limit - v_1;
+                this.ket = this.cursor;
+                among_var = this.find_among_b$esjava$1(frenchStemmer.a_6);
+
+                if (among_var === 0) {
+                    this.limit_backward = v_2;
+                    return false;
+                }
+
+                this.bra = this.cursor;
+
+                switch (among_var) {
+                    case 0:
+                        this.limit_backward = v_2;
+                        return false;
+
+                    case 1:
+                        if (!this.r_R2$esjava$0()) {
+                            this.limit_backward = v_2;
+                            return false;
+                        }
+
+                        this.slice_del$esjava$0();
+                        break;
+
+                    case 2:
+                        this.slice_del$esjava$0();
+                        break;
+
+                    case 3:
+                        this.slice_del$esjava$0();
+                        v_3 = this.limit - this.cursor;
+
+                        lab0: do {
+                            this.ket = this.cursor;
+
+                            if (!this.eq_s_b$esjava$1("e")) {
+                                this.cursor = this.limit - v_3;
+                                break lab0;
+                            }
+
+                            this.bra = this.cursor;
+                            this.slice_del$esjava$0();
+                        } while (false);
+
+                        break;
+                }
+
+                this.limit_backward = v_2;
+                return true;
+            }
+        }, {
+            key: 'r_residual_suffix$esjava$0',
+            value: function r_residual_suffix$esjava$0() {
+                var among_var = undefined;
+                var v_1 = undefined;
+                var v_2 = undefined;
+                var v_3 = undefined;
+                var v_4 = undefined;
+                var v_5 = undefined;
+                v_1 = this.limit - this.cursor;
+
+                lab0: do {
+                    this.ket = this.cursor;
+
+                    if (!this.eq_s_b$esjava$1("s")) {
+                        this.cursor = this.limit - v_1;
+                        break lab0;
+                    }
+
+                    this.bra = this.cursor;
+                    v_2 = this.limit - this.cursor;
+
+                    if (!this.out_grouping_b$esjava$3(frenchStemmer.g_keep_with_s, 97, 232)) {
+                        this.cursor = this.limit - v_1;
+                        break lab0;
+                    }
+
+                    this.cursor = this.limit - v_2;
+                    this.slice_del$esjava$0();
+                } while (false);
+
+                v_3 = this.limit - this.cursor;
+
+                if (this.cursor < this.I_pV) {
+                    return false;
+                }
+
+                this.cursor = this.I_pV;
+                v_4 = this.limit_backward;
+                this.limit_backward = this.cursor;
+                this.cursor = this.limit - v_3;
+                this.ket = this.cursor;
+                among_var = this.find_among_b$esjava$1(frenchStemmer.a_7);
+
+                if (among_var === 0) {
+                    this.limit_backward = v_4;
+                    return false;
+                }
+
+                this.bra = this.cursor;
+
+                switch (among_var) {
+                    case 0:
+                        this.limit_backward = v_4;
+                        return false;
+
+                    case 1:
+                        if (!this.r_R2$esjava$0()) {
+                            this.limit_backward = v_4;
+                            return false;
+                        }
+
+                        lab1: do {
+                            v_5 = this.limit - this.cursor;
+
+                            lab2: do {
+                                if (!this.eq_s_b$esjava$1("s")) {
+                                    break lab2;
+                                }
+
+                                break lab1;
+                            } while (false);
+
+                            this.cursor = this.limit - v_5;
+
+                            if (!this.eq_s_b$esjava$1("t")) {
+                                this.limit_backward = v_4;
+                                return false;
+                            }
+                        } while (false);
+
+                        this.slice_del$esjava$0();
+                        break;
+
+                    case 2:
+                        this.slice_from$esjava$1("i");
+                        break;
+
+                    case 3:
+                        this.slice_del$esjava$0();
+                        break;
+
+                    case 4:
+                        if (!this.eq_s_b$esjava$1("gu")) {
+                            this.limit_backward = v_4;
+                            return false;
+                        }
+
+                        this.slice_del$esjava$0();
+                        break;
+                }
+
+                this.limit_backward = v_4;
+                return true;
+            }
+        }, {
+            key: 'r_un_double$esjava$0',
+            value: function r_un_double$esjava$0() {
+                var v_1 = undefined;
+                v_1 = this.limit - this.cursor;
+
+                if (this.find_among_b$esjava$1(frenchStemmer.a_8) === 0) {
+                    return false;
+                }
+
+                this.cursor = this.limit - v_1;
+                this.ket = this.cursor;
+
+                if (this.cursor <= this.limit_backward) {
+                    return false;
+                }
+
+                this.cursor--;
+                this.bra = this.cursor;
+                this.slice_del$esjava$0();
+                return true;
+            }
+        }, {
+            key: 'r_un_accent$esjava$0',
+            value: function r_un_accent$esjava$0() {
+                var v_3 = undefined;
+                {
+                    var v_1 = 1;
+
+                    replab0: while (true) {
+                        lab1: do {
+                            if (!this.out_grouping_b$esjava$3(frenchStemmer.g_v, 97, 251)) {
+                                break lab1;
+                            }
+
+                            v_1--;
+                            continue replab0;
+                        } while (false);
+
+                        break replab0;
+                    }
+
+                    if (v_1 > 0) {
+                        return false;
+                    }
+                }
+                this.ket = this.cursor;
+
+                lab2: do {
+                    v_3 = this.limit - this.cursor;
+
+                    lab3: do {
+                        if (!this.eq_s_b$esjava$1('\u00E9')) {
+                            break lab3;
+                        }
+
+                        break lab2;
+                    } while (false);
+
+                    this.cursor = this.limit - v_3;
+
+                    if (!this.eq_s_b$esjava$1('\u00E8')) {
+                        return false;
+                    }
+                } while (false);
+
+                this.bra = this.cursor;
+                this.slice_from$esjava$1("e");
+                return true;
+            }
+        }, {
+            key: 'stem$esjava$0',
+            value: function stem$esjava$0() {
+                var v_1 = undefined;
+                var v_2 = undefined;
+                var v_3 = undefined;
+                var v_4 = undefined;
+                var v_5 = undefined;
+                var v_6 = undefined;
+                var v_7 = undefined;
+                var v_8 = undefined;
+                var v_9 = undefined;
+                var v_10 = undefined;
+                var v_11 = undefined;
+                v_1 = this.cursor;
+
+                lab0: do {
+                    if (!this.r_prelude$esjava$0()) {
+                        break lab0;
+                    }
+                } while (false);
+
+                this.cursor = v_1;
+                v_2 = this.cursor;
+
+                lab1: do {
+                    if (!this.r_mark_regions$esjava$0()) {
+                        break lab1;
+                    }
+                } while (false);
+
+                this.cursor = v_2;
+                this.limit_backward = this.cursor;
+                this.cursor = this.limit;
+                v_3 = this.limit - this.cursor;
+
+                lab2: do {
+                    lab3: do {
+                        v_4 = this.limit - this.cursor;
+
+                        lab4: do {
+                            v_5 = this.limit - this.cursor;
+
+                            lab5: do {
+                                v_6 = this.limit - this.cursor;
+
+                                lab6: do {
+                                    if (!this.r_standard_suffix$esjava$0()) {
+                                        break lab6;
+                                    }
+
+                                    break lab5;
+                                } while (false);
+
+                                this.cursor = this.limit - v_6;
+
+                                lab7: do {
+                                    if (!this.r_i_verb_suffix$esjava$0()) {
+                                        break lab7;
+                                    }
+
+                                    break lab5;
+                                } while (false);
+
+                                this.cursor = this.limit - v_6;
+
+                                if (!this.r_verb_suffix$esjava$0()) {
+                                    break lab4;
+                                }
+                            } while (false);
+
+                            this.cursor = this.limit - v_5;
+                            v_7 = this.limit - this.cursor;
+
+                            lab8: do {
+                                this.ket = this.cursor;
+
+                                lab9: do {
+                                    v_8 = this.limit - this.cursor;
+
+                                    lab10: do {
+                                        if (!this.eq_s_b$esjava$1("Y")) {
+                                            break lab10;
+                                        }
+
+                                        this.bra = this.cursor;
+                                        this.slice_from$esjava$1("i");
+                                        break lab9;
+                                    } while (false);
+
+                                    this.cursor = this.limit - v_8;
+
+                                    if (!this.eq_s_b$esjava$1('\u00E7')) {
+                                        this.cursor = this.limit - v_7;
+                                        break lab8;
+                                    }
+
+                                    this.bra = this.cursor;
+                                    this.slice_from$esjava$1("c");
+                                } while (false);
+                            } while (false);
+
+                            break lab3;
+                        } while (false);
+
+                        this.cursor = this.limit - v_4;
+
+                        if (!this.r_residual_suffix$esjava$0()) {
+                            break lab2;
+                        }
+                    } while (false);
+                } while (false);
+
+                this.cursor = this.limit - v_3;
+                v_9 = this.limit - this.cursor;
+
+                lab11: do {
+                    if (!this.r_un_double$esjava$0()) {
+                        break lab11;
+                    }
+                } while (false);
+
+                this.cursor = this.limit - v_9;
+                v_10 = this.limit - this.cursor;
+
+                lab12: do {
+                    if (!this.r_un_accent$esjava$0()) {
+                        break lab12;
+                    }
+                } while (false);
+
+                this.cursor = this.limit - v_10;
+                this.cursor = this.limit_backward;
+                v_11 = this.cursor;
+
+                lab13: do {
+                    if (!this.r_postlude$esjava$0()) {
+                        break lab13;
+                    }
+                } while (false);
+
+                this.cursor = v_11;
+                return true;
+            }
+        }, {
+            key: 'stem',
+            value: function stem() {
+                var _get36;
+
+                for (var _len35 = arguments.length, args = Array(_len35), _key35 = 0; _key35 < _len35; _key35++) {
+                    args[_key35] = arguments[_key35];
+                }
+
+                switch (args.length) {
+                    case 0:
+                        return this.stem$esjava$0.apply(this, args);
+                }
+
+                return (_get36 = _get(Object.getPrototypeOf(frenchStemmer.prototype), 'stem', this)).call.apply(_get36, [this].concat(args));
+            }
+        }, {
+            key: 'I_p2',
+            get: function get() {
+                return Object.prototype.hasOwnProperty.call(this, '_$esjava$I_p2') ? this._$esjava$I_p2 : this._$esjava$I_p2 = 0;
+            },
+            set: function set(v) {
+                this._$esjava$I_p2 = v;
+            }
+        }, {
+            key: 'I_p1',
+            get: function get() {
+                return Object.prototype.hasOwnProperty.call(this, '_$esjava$I_p1') ? this._$esjava$I_p1 : this._$esjava$I_p1 = 0;
+            },
+            set: function set(v) {
+                this._$esjava$I_p1 = v;
+            }
+        }, {
+            key: 'I_pV',
+            get: function get() {
+                return Object.prototype.hasOwnProperty.call(this, '_$esjava$I_pV') ? this._$esjava$I_pV : this._$esjava$I_pV = 0;
+            },
+            set: function set(v) {
+                this._$esjava$I_pV = v;
+            }
+        }], [{
+            key: 'a_0',
+            get: function get() {
+                delete frenchStemmer.a_0;
+                return frenchStemmer.a_0 = [new Among("col", -1, -1), new Among("par", -1, -1), new Among("tap", -1, -1)];
+            }
+        }, {
+            key: 'a_1',
+            get: function get() {
+                delete frenchStemmer.a_1;
+                return frenchStemmer.a_1 = [new Among("", -1, 4), new Among("I", 0, 1), new Among("U", 0, 2), new Among("Y", 0, 3)];
+            }
+        }, {
+            key: 'a_2',
+            get: function get() {
+                delete frenchStemmer.a_2;
+                return frenchStemmer.a_2 = [new Among("iqU", -1, 3), new Among("abl", -1, 3), new Among('I\u00E8r', -1, 4), new Among('i\u00E8r', -1, 4), new Among("eus", -1, 2), new Among("iv", -1, 1)];
+            }
+        }, {
+            key: 'a_3',
+            get: function get() {
+                delete frenchStemmer.a_3;
+                return frenchStemmer.a_3 = [new Among("ic", -1, 2), new Among("abil", -1, 1), new Among("iv", -1, 3)];
+            }
+        }, {
+            key: 'a_4',
+            get: function get() {
+                delete frenchStemmer.a_4;
+                return frenchStemmer.a_4 = [new Among("iqUe", -1, 1), new Among("atrice", -1, 2), new Among("ance", -1, 1), new Among("ence", -1, 5), new Among("logie", -1, 3), new Among("able", -1, 1), new Among("isme", -1, 1), new Among("euse", -1, 11), new Among("iste", -1, 1), new Among("ive", -1, 8), new Among("if", -1, 8), new Among("usion", -1, 4), new Among("ation", -1, 2), new Among("ution", -1, 4), new Among("ateur", -1, 2), new Among("iqUes", -1, 1), new Among("atrices", -1, 2), new Among("ances", -1, 1), new Among("ences", -1, 5), new Among("logies", -1, 3), new Among("ables", -1, 1), new Among("ismes", -1, 1), new Among("euses", -1, 11), new Among("istes", -1, 1), new Among("ives", -1, 8), new Among("ifs", -1, 8), new Among("usions", -1, 4), new Among("ations", -1, 2), new Among("utions", -1, 4), new Among("ateurs", -1, 2), new Among("ments", -1, 15), new Among("ements", 30, 6), new Among("issements", 31, 12), new Among('it\u00E9s', -1, 7), new Among("ment", -1, 15), new Among("ement", 34, 6), new Among("issement", 35, 12), new Among("amment", 34, 13), new Among("emment", 34, 14), new Among("aux", -1, 10), new Among("eaux", 39, 9), new Among("eux", -1, 1), new Among('it\u00E9', -1, 7)];
+            }
+        }, {
+            key: 'a_5',
+            get: function get() {
+                delete frenchStemmer.a_5;
+                return frenchStemmer.a_5 = [new Among("ira", -1, 1), new Among("ie", -1, 1), new Among("isse", -1, 1), new Among("issante", -1, 1), new Among("i", -1, 1), new Among("irai", 4, 1), new Among("ir", -1, 1), new Among("iras", -1, 1), new Among("ies", -1, 1), new Among('\u00EEmes', -1, 1), new Among("isses", -1, 1), new Among("issantes", -1, 1), new Among('\u00EEtes', -1, 1), new Among("is", -1, 1), new Among("irais", 13, 1), new Among("issais", 13, 1), new Among("irions", -1, 1), new Among("issions", -1, 1), new Among("irons", -1, 1), new Among("issons", -1, 1), new Among("issants", -1, 1), new Among("it", -1, 1), new Among("irait", 21, 1), new Among("issait", 21, 1), new Among("issant", -1, 1), new Among("iraIent", -1, 1), new Among("issaIent", -1, 1), new Among("irent", -1, 1), new Among("issent", -1, 1), new Among("iront", -1, 1), new Among('\u00EEt', -1, 1), new Among("iriez", -1, 1), new Among("issiez", -1, 1), new Among("irez", -1, 1), new Among("issez", -1, 1)];
+            }
+        }, {
+            key: 'a_6',
+            get: function get() {
+                delete frenchStemmer.a_6;
+                return frenchStemmer.a_6 = [new Among("a", -1, 3), new Among("era", 0, 2), new Among("asse", -1, 3), new Among("ante", -1, 3), new Among('\u00E9e', -1, 2), new Among("ai", -1, 3), new Among("erai", 5, 2), new Among("er", -1, 2), new Among("as", -1, 3), new Among("eras", 8, 2), new Among('\u00E2mes', -1, 3), new Among("asses", -1, 3), new Among("antes", -1, 3), new Among('\u00E2tes', -1, 3), new Among('\u00E9es', -1, 2), new Among("ais", -1, 3), new Among("erais", 15, 2), new Among("ions", -1, 1), new Among("erions", 17, 2), new Among("assions", 17, 3), new Among("erons", -1, 2), new Among("ants", -1, 3), new Among('\u00E9s', -1, 2), new Among("ait", -1, 3), new Among("erait", 23, 2), new Among("ant", -1, 3), new Among("aIent", -1, 3), new Among("eraIent", 26, 2), new Among('\u00E8rent', -1, 2), new Among("assent", -1, 3), new Among("eront", -1, 2), new Among('\u00E2t', -1, 3), new Among("ez", -1, 2), new Among("iez", 32, 2), new Among("eriez", 33, 2), new Among("assiez", 33, 3), new Among("erez", 32, 2), new Among('\u00E9', -1, 2)];
+            }
+        }, {
+            key: 'a_7',
+            get: function get() {
+                delete frenchStemmer.a_7;
+                return frenchStemmer.a_7 = [new Among("e", -1, 3), new Among('I\u00E8re', 0, 2), new Among('i\u00E8re', 0, 2), new Among("ion", -1, 1), new Among("Ier", -1, 2), new Among("ier", -1, 2), new Among('\u00EB', -1, 4)];
+            }
+        }, {
+            key: 'a_8',
+            get: function get() {
+                delete frenchStemmer.a_8;
+                return frenchStemmer.a_8 = [new Among("ell", -1, -1), new Among("eill", -1, -1), new Among("enn", -1, -1), new Among("onn", -1, -1), new Among("ett", -1, -1)];
+            }
+        }, {
+            key: 'g_v',
+            get: function get() {
+                delete frenchStemmer.g_v;
+                return frenchStemmer.g_v = [17, 65, 16, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 128, 130, 103, 8, 5];
+            }
+        }, {
+            key: 'g_keep_with_s',
+            get: function get() {
+                delete frenchStemmer.g_keep_with_s;
+                return frenchStemmer.g_keep_with_s = [1, 65, 20, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 128];
+            }
+        }]);
+
+        return frenchStemmer;
+    }(SnowballStemmer);
+
+    var germanStemmer = function (_SnowballStemmer11) {
+        _inherits(germanStemmer, _SnowballStemmer11);
+
+        function germanStemmer() {
+            _classCallCheck(this, germanStemmer);
+
+            return _possibleConstructorReturn(this, Object.getPrototypeOf(germanStemmer).apply(this, arguments));
+        }
+
+        _createClass(germanStemmer, [{
+            key: 'r_prelude$esjava$0',
+            value: function r_prelude$esjava$0() {
+                var v_1 = undefined;
+                var v_2 = undefined;
+                var v_3 = undefined;
+                var v_4 = undefined;
+                var v_5 = undefined;
+                var v_6 = undefined;
+                v_1 = this.cursor;
+
+                replab0: while (true) {
+                    v_2 = this.cursor;
+
+                    lab1: do {
+                        lab2: do {
+                            v_3 = this.cursor;
+
+                            lab3: do {
+                                this.bra = this.cursor;
+
+                                if (!this.eq_s$esjava$1('\u00DF')) {
+                                    break lab3;
+                                }
+
+                                this.ket = this.cursor;
+                                this.slice_from$esjava$1("ss");
+                                break lab2;
+                            } while (false);
+
+                            this.cursor = v_3;
+
+                            if (this.cursor >= this.limit) {
+                                break lab1;
+                            }
+
+                            this.cursor++;
+                        } while (false);
+
+                        continue replab0;
+                    } while (false);
+
+                    this.cursor = v_2;
+                    break replab0;
+                }
+
+                this.cursor = v_1;
+
+                replab4: while (true) {
+                    v_4 = this.cursor;
+
+                    lab5: do {
+                        golab6: while (true) {
+                            v_5 = this.cursor;
+
+                            lab7: do {
+                                if (!this.in_grouping$esjava$3(germanStemmer.g_v, 97, 252)) {
+                                    break lab7;
+                                }
+
+                                this.bra = this.cursor;
+
+                                lab8: do {
+                                    v_6 = this.cursor;
+
+                                    lab9: do {
+                                        if (!this.eq_s$esjava$1("u")) {
+                                            break lab9;
+                                        }
+
+                                        this.ket = this.cursor;
+
+                                        if (!this.in_grouping$esjava$3(germanStemmer.g_v, 97, 252)) {
+                                            break lab9;
+                                        }
+
+                                        this.slice_from$esjava$1("U");
+                                        break lab8;
+                                    } while (false);
+
+                                    this.cursor = v_6;
+
+                                    if (!this.eq_s$esjava$1("y")) {
+                                        break lab7;
+                                    }
+
+                                    this.ket = this.cursor;
+
+                                    if (!this.in_grouping$esjava$3(germanStemmer.g_v, 97, 252)) {
+                                        break lab7;
+                                    }
+
+                                    this.slice_from$esjava$1("Y");
+                                } while (false);
+
+                                this.cursor = v_5;
+                                break golab6;
+                            } while (false);
+
+                            this.cursor = v_5;
+
+                            if (this.cursor >= this.limit) {
+                                break lab5;
+                            }
+
+                            this.cursor++;
+                        }
+
+                        continue replab4;
+                    } while (false);
+
+                    this.cursor = v_4;
+                    break replab4;
+                }
+
+                return true;
+            }
+        }, {
+            key: 'r_mark_regions$esjava$0',
+            value: function r_mark_regions$esjava$0() {
+                var v_1 = undefined;
+                this.I_p1 = this.limit;
+                this.I_p2 = this.limit;
+                v_1 = this.cursor;
+                {
+                    var c = this.cursor + 3;
+
+                    if (0 > c || c > this.limit) {
+                        return false;
+                    }
+
+                    this.cursor = c;
+                }
+                this.I_x = this.cursor;
+                this.cursor = v_1;
+
+                golab0: while (true) {
+                    lab1: do {
+                        if (!this.in_grouping$esjava$3(germanStemmer.g_v, 97, 252)) {
+                            break lab1;
+                        }
+
+                        break golab0;
+                    } while (false);
+
+                    if (this.cursor >= this.limit) {
+                        return false;
+                    }
+
+                    this.cursor++;
+                }
+
+                golab2: while (true) {
+                    lab3: do {
+                        if (!this.out_grouping$esjava$3(germanStemmer.g_v, 97, 252)) {
+                            break lab3;
+                        }
+
+                        break golab2;
+                    } while (false);
+
+                    if (this.cursor >= this.limit) {
+                        return false;
+                    }
+
+                    this.cursor++;
+                }
+
+                this.I_p1 = this.cursor;
+
+                lab4: do {
+                    if (!(this.I_p1 < this.I_x)) {
+                        break lab4;
+                    }
+
+                    this.I_p1 = this.I_x;
+                } while (false);
+
+                golab5: while (true) {
+                    lab6: do {
+                        if (!this.in_grouping$esjava$3(germanStemmer.g_v, 97, 252)) {
+                            break lab6;
+                        }
+
+                        break golab5;
+                    } while (false);
+
+                    if (this.cursor >= this.limit) {
+                        return false;
+                    }
+
+                    this.cursor++;
+                }
+
+                golab7: while (true) {
+                    lab8: do {
+                        if (!this.out_grouping$esjava$3(germanStemmer.g_v, 97, 252)) {
+                            break lab8;
+                        }
+
+                        break golab7;
+                    } while (false);
+
+                    if (this.cursor >= this.limit) {
+                        return false;
+                    }
+
+                    this.cursor++;
+                }
+
+                this.I_p2 = this.cursor;
+                return true;
+            }
+        }, {
+            key: 'r_postlude$esjava$0',
+            value: function r_postlude$esjava$0() {
+                var among_var = undefined;
+                var v_1 = undefined;
+
+                replab0: while (true) {
+                    v_1 = this.cursor;
+
+                    lab1: do {
+                        this.bra = this.cursor;
+                        among_var = this.find_among$esjava$1(germanStemmer.a_0);
+
+                        if (among_var === 0) {
+                            break lab1;
+                        }
+
+                        this.ket = this.cursor;
+
+                        switch (among_var) {
+                            case 0:
+                                break lab1;
+
+                            case 1:
+                                this.slice_from$esjava$1("y");
+                                break;
+
+                            case 2:
+                                this.slice_from$esjava$1("u");
+                                break;
+
+                            case 3:
+                                this.slice_from$esjava$1("a");
+                                break;
+
+                            case 4:
+                                this.slice_from$esjava$1("o");
+                                break;
+
+                            case 5:
+                                this.slice_from$esjava$1("u");
+                                break;
+
+                            case 6:
+                                if (this.cursor >= this.limit) {
+                                    break lab1;
+                                }
+
+                                this.cursor++;
+                                break;
+                        }
+
+                        continue replab0;
+                    } while (false);
+
+                    this.cursor = v_1;
+                    break replab0;
+                }
+
+                return true;
+            }
+        }, {
+            key: 'r_R1$esjava$0',
+            value: function r_R1$esjava$0() {
+                if (!(this.I_p1 <= this.cursor)) {
+                    return false;
+                }
+
+                return true;
+            }
+        }, {
+            key: 'r_R2$esjava$0',
+            value: function r_R2$esjava$0() {
+                if (!(this.I_p2 <= this.cursor)) {
+                    return false;
+                }
+
+                return true;
+            }
+        }, {
+            key: 'r_standard_suffix$esjava$0',
+            value: function r_standard_suffix$esjava$0() {
+                var among_var = undefined;
+                var v_1 = undefined;
+                var v_2 = undefined;
+                var v_3 = undefined;
+                var v_4 = undefined;
+                var v_5 = undefined;
+                var v_6 = undefined;
+                var v_7 = undefined;
+                var v_8 = undefined;
+                var v_9 = undefined;
+                var v_10 = undefined;
+                v_1 = this.limit - this.cursor;
+
+                lab0: do {
+                    this.ket = this.cursor;
+                    among_var = this.find_among_b$esjava$1(germanStemmer.a_1);
+
+                    if (among_var === 0) {
+                        break lab0;
+                    }
+
+                    this.bra = this.cursor;
+
+                    if (!this.r_R1$esjava$0()) {
+                        break lab0;
+                    }
+
+                    switch (among_var) {
+                        case 0:
+                            break lab0;
+
+                        case 1:
+                            this.slice_del$esjava$0();
+                            break;
+
+                        case 2:
+                            this.slice_del$esjava$0();
+                            v_2 = this.limit - this.cursor;
+
+                            lab1: do {
+                                this.ket = this.cursor;
+
+                                if (!this.eq_s_b$esjava$1("s")) {
+                                    this.cursor = this.limit - v_2;
+                                    break lab1;
+                                }
+
+                                this.bra = this.cursor;
+
+                                if (!this.eq_s_b$esjava$1("nis")) {
+                                    this.cursor = this.limit - v_2;
+                                    break lab1;
+                                }
+
+                                this.slice_del$esjava$0();
+                            } while (false);
+
+                            break;
+
+                        case 3:
+                            if (!this.in_grouping_b$esjava$3(germanStemmer.g_s_ending, 98, 116)) {
+                                break lab0;
+                            }
+
+                            this.slice_del$esjava$0();
+                            break;
+                    }
+                } while (false);
+
+                this.cursor = this.limit - v_1;
+                v_3 = this.limit - this.cursor;
+
+                lab2: do {
+                    this.ket = this.cursor;
+                    among_var = this.find_among_b$esjava$1(germanStemmer.a_2);
+
+                    if (among_var === 0) {
+                        break lab2;
+                    }
+
+                    this.bra = this.cursor;
+
+                    if (!this.r_R1$esjava$0()) {
+                        break lab2;
+                    }
+
+                    switch (among_var) {
+                        case 0:
+                            break lab2;
+
+                        case 1:
+                            this.slice_del$esjava$0();
+                            break;
+
+                        case 2:
+                            if (!this.in_grouping_b$esjava$3(germanStemmer.g_st_ending, 98, 116)) {
+                                break lab2;
+                            }
+
+                            {
+                                var c = this.cursor - 3;
+
+                                if (this.limit_backward > c || c > this.limit) {
+                                    break lab2;
+                                }
+
+                                this.cursor = c;
+                            }
+                            this.slice_del$esjava$0();
+                            break;
+                    }
+                } while (false);
+
+                this.cursor = this.limit - v_3;
+                v_4 = this.limit - this.cursor;
+
+                lab3: do {
+                    this.ket = this.cursor;
+                    among_var = this.find_among_b$esjava$1(germanStemmer.a_4);
+
+                    if (among_var === 0) {
+                        break lab3;
+                    }
+
+                    this.bra = this.cursor;
+
+                    if (!this.r_R2$esjava$0()) {
+                        break lab3;
+                    }
+
+                    switch (among_var) {
+                        case 0:
+                            break lab3;
+
+                        case 1:
+                            this.slice_del$esjava$0();
+                            v_5 = this.limit - this.cursor;
+
+                            lab4: do {
+                                this.ket = this.cursor;
+
+                                if (!this.eq_s_b$esjava$1("ig")) {
+                                    this.cursor = this.limit - v_5;
+                                    break lab4;
+                                }
+
+                                this.bra = this.cursor;
+                                {
+                                    v_6 = this.limit - this.cursor;
+
+                                    lab5: do {
+                                        if (!this.eq_s_b$esjava$1("e")) {
+                                            break lab5;
+                                        }
+
+                                        this.cursor = this.limit - v_5;
+                                        break lab4;
+                                    } while (false);
+
+                                    this.cursor = this.limit - v_6;
+                                }
+
+                                if (!this.r_R2$esjava$0()) {
+                                    this.cursor = this.limit - v_5;
+                                    break lab4;
+                                }
+
+                                this.slice_del$esjava$0();
+                            } while (false);
+
+                            break;
+
+                        case 2:
+                            {
+                                v_7 = this.limit - this.cursor;
+
+                                lab6: do {
+                                    if (!this.eq_s_b$esjava$1("e")) {
+                                        break lab6;
+                                    }
+
+                                    break lab3;
+                                } while (false);
+
+                                this.cursor = this.limit - v_7;
+                            }
+                            this.slice_del$esjava$0();
+                            break;
+
+                        case 3:
+                            this.slice_del$esjava$0();
+                            v_8 = this.limit - this.cursor;
+
+                            lab7: do {
+                                this.ket = this.cursor;
+
+                                lab8: do {
+                                    v_9 = this.limit - this.cursor;
+
+                                    lab9: do {
+                                        if (!this.eq_s_b$esjava$1("er")) {
+                                            break lab9;
+                                        }
+
+                                        break lab8;
+                                    } while (false);
+
+                                    this.cursor = this.limit - v_9;
+
+                                    if (!this.eq_s_b$esjava$1("en")) {
+                                        this.cursor = this.limit - v_8;
+                                        break lab7;
+                                    }
+                                } while (false);
+
+                                this.bra = this.cursor;
+
+                                if (!this.r_R1$esjava$0()) {
+                                    this.cursor = this.limit - v_8;
+                                    break lab7;
+                                }
+
+                                this.slice_del$esjava$0();
+                            } while (false);
+
+                            break;
+
+                        case 4:
+                            this.slice_del$esjava$0();
+                            v_10 = this.limit - this.cursor;
+
+                            lab10: do {
+                                this.ket = this.cursor;
+                                among_var = this.find_among_b$esjava$1(germanStemmer.a_3);
+
+                                if (among_var === 0) {
+                                    this.cursor = this.limit - v_10;
+                                    break lab10;
+                                }
+
+                                this.bra = this.cursor;
+
+                                if (!this.r_R2$esjava$0()) {
+                                    this.cursor = this.limit - v_10;
+                                    break lab10;
+                                }
+
+                                switch (among_var) {
+                                    case 0:
+                                        this.cursor = this.limit - v_10;
+                                        break lab10;
+
+                                    case 1:
+                                        this.slice_del$esjava$0();
+                                        break;
+                                }
+                            } while (false);
+
+                            break;
+                    }
+                } while (false);
+
+                this.cursor = this.limit - v_4;
+                return true;
+            }
+        }, {
+            key: 'stem$esjava$0',
+            value: function stem$esjava$0() {
+                var v_1 = undefined;
+                var v_2 = undefined;
+                var v_3 = undefined;
+                var v_4 = undefined;
+                v_1 = this.cursor;
+
+                lab0: do {
+                    if (!this.r_prelude$esjava$0()) {
+                        break lab0;
+                    }
+                } while (false);
+
+                this.cursor = v_1;
+                v_2 = this.cursor;
+
+                lab1: do {
+                    if (!this.r_mark_regions$esjava$0()) {
+                        break lab1;
+                    }
+                } while (false);
+
+                this.cursor = v_2;
+                this.limit_backward = this.cursor;
+                this.cursor = this.limit;
+                v_3 = this.limit - this.cursor;
+
+                lab2: do {
+                    if (!this.r_standard_suffix$esjava$0()) {
+                        break lab2;
+                    }
+                } while (false);
+
+                this.cursor = this.limit - v_3;
+                this.cursor = this.limit_backward;
+                v_4 = this.cursor;
+
+                lab3: do {
+                    if (!this.r_postlude$esjava$0()) {
+                        break lab3;
+                    }
+                } while (false);
+
+                this.cursor = v_4;
+                return true;
+            }
+        }, {
+            key: 'stem',
+            value: function stem() {
+                var _get37;
+
+                for (var _len36 = arguments.length, args = Array(_len36), _key36 = 0; _key36 < _len36; _key36++) {
+                    args[_key36] = arguments[_key36];
+                }
+
+                switch (args.length) {
+                    case 0:
+                        return this.stem$esjava$0.apply(this, args);
+                }
+
+                return (_get37 = _get(Object.getPrototypeOf(germanStemmer.prototype), 'stem', this)).call.apply(_get37, [this].concat(args));
+            }
+        }, {
+            key: 'I_x',
+            get: function get() {
+                return Object.prototype.hasOwnProperty.call(this, '_$esjava$I_x') ? this._$esjava$I_x : this._$esjava$I_x = 0;
+            },
+            set: function set(v) {
+                this._$esjava$I_x = v;
+            }
+        }, {
+            key: 'I_p2',
+            get: function get() {
+                return Object.prototype.hasOwnProperty.call(this, '_$esjava$I_p2') ? this._$esjava$I_p2 : this._$esjava$I_p2 = 0;
+            },
+            set: function set(v) {
+                this._$esjava$I_p2 = v;
+            }
+        }, {
+            key: 'I_p1',
+            get: function get() {
+                return Object.prototype.hasOwnProperty.call(this, '_$esjava$I_p1') ? this._$esjava$I_p1 : this._$esjava$I_p1 = 0;
+            },
+            set: function set(v) {
+                this._$esjava$I_p1 = v;
+            }
+        }], [{
+            key: 'a_0',
+            get: function get() {
+                delete germanStemmer.a_0;
+                return germanStemmer.a_0 = [new Among("", -1, 6), new Among("U", 0, 2), new Among("Y", 0, 1), new Among('\u00E4', 0, 3), new Among('\u00F6', 0, 4), new Among('\u00FC', 0, 5)];
+            }
+        }, {
+            key: 'a_1',
+            get: function get() {
+                delete germanStemmer.a_1;
+                return germanStemmer.a_1 = [new Among("e", -1, 2), new Among("em", -1, 1), new Among("en", -1, 2), new Among("ern", -1, 1), new Among("er", -1, 1), new Among("s", -1, 3), new Among("es", 5, 2)];
+            }
+        }, {
+            key: 'a_2',
+            get: function get() {
+                delete germanStemmer.a_2;
+                return germanStemmer.a_2 = [new Among("en", -1, 1), new Among("er", -1, 1), new Among("st", -1, 2), new Among("est", 2, 1)];
+            }
+        }, {
+            key: 'a_3',
+            get: function get() {
+                delete germanStemmer.a_3;
+                return germanStemmer.a_3 = [new Among("ig", -1, 1), new Among("lich", -1, 1)];
+            }
+        }, {
+            key: 'a_4',
+            get: function get() {
+                delete germanStemmer.a_4;
+                return germanStemmer.a_4 = [new Among("end", -1, 1), new Among("ig", -1, 2), new Among("ung", -1, 1), new Among("lich", -1, 3), new Among("isch", -1, 2), new Among("ik", -1, 2), new Among("heit", -1, 3), new Among("keit", -1, 4)];
+            }
+        }, {
+            key: 'g_v',
+            get: function get() {
+                delete germanStemmer.g_v;
+                return germanStemmer.g_v = [17, 65, 16, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 8, 0, 32, 8];
+            }
+        }, {
+            key: 'g_s_ending',
+            get: function get() {
+                delete germanStemmer.g_s_ending;
+                return germanStemmer.g_s_ending = [117, 30, 5];
+            }
+        }, {
+            key: 'g_st_ending',
+            get: function get() {
+                delete germanStemmer.g_st_ending;
+                return germanStemmer.g_st_ending = [117, 30, 4];
+            }
+        }]);
+
+        return germanStemmer;
+    }(SnowballStemmer);
+
+    var portugueseStemmer = function (_SnowballStemmer17) {
+        _inherits(portugueseStemmer, _SnowballStemmer17);
+
+        function portugueseStemmer() {
+            _classCallCheck(this, portugueseStemmer);
+
+            return _possibleConstructorReturn(this, Object.getPrototypeOf(portugueseStemmer).apply(this, arguments));
+        }
+
+        _createClass(portugueseStemmer, [{
+            key: 'r_prelude$esjava$0',
+            value: function r_prelude$esjava$0() {
+                var among_var = undefined;
+                var v_1 = undefined;
+
+                replab0: while (true) {
+                    v_1 = this.cursor;
+
+                    lab1: do {
+                        this.bra = this.cursor;
+                        among_var = this.find_among$esjava$1(portugueseStemmer.a_0);
+
+                        if (among_var === 0) {
+                            break lab1;
+                        }
+
+                        this.ket = this.cursor;
+
+                        switch (among_var) {
+                            case 0:
+                                break lab1;
+
+                            case 1:
+                                this.slice_from$esjava$1("a~");
+                                break;
+
+                            case 2:
+                                this.slice_from$esjava$1("o~");
+                                break;
+
+                            case 3:
+                                if (this.cursor >= this.limit) {
+                                    break lab1;
+                                }
+
+                                this.cursor++;
+                                break;
+                        }
+
+                        continue replab0;
+                    } while (false);
+
+                    this.cursor = v_1;
+                    break replab0;
+                }
+
+                return true;
+            }
+        }, {
+            key: 'r_mark_regions$esjava$0',
+            value: function r_mark_regions$esjava$0() {
+                var v_1 = undefined;
+                var v_2 = undefined;
+                var v_3 = undefined;
+                var v_6 = undefined;
+                var v_8 = undefined;
+                this.I_pV = this.limit;
+                this.I_p1 = this.limit;
+                this.I_p2 = this.limit;
+                v_1 = this.cursor;
+
+                lab0: do {
+                    lab1: do {
+                        v_2 = this.cursor;
+
+                        lab2: do {
+                            if (!this.in_grouping$esjava$3(portugueseStemmer.g_v, 97, 250)) {
+                                break lab2;
+                            }
+
+                            lab3: do {
+                                v_3 = this.cursor;
+
+                                lab4: do {
+                                    if (!this.out_grouping$esjava$3(portugueseStemmer.g_v, 97, 250)) {
+                                        break lab4;
+                                    }
+
+                                    golab5: while (true) {
+                                        lab6: do {
+                                            if (!this.in_grouping$esjava$3(portugueseStemmer.g_v, 97, 250)) {
+                                                break lab6;
+                                            }
+
+                                            break golab5;
+                                        } while (false);
+
+                                        if (this.cursor >= this.limit) {
+                                            break lab4;
+                                        }
+
+                                        this.cursor++;
+                                    }
+
+                                    break lab3;
+                                } while (false);
+
+                                this.cursor = v_3;
+
+                                if (!this.in_grouping$esjava$3(portugueseStemmer.g_v, 97, 250)) {
+                                    break lab2;
+                                }
+
+                                golab7: while (true) {
+                                    lab8: do {
+                                        if (!this.out_grouping$esjava$3(portugueseStemmer.g_v, 97, 250)) {
+                                            break lab8;
+                                        }
+
+                                        break golab7;
+                                    } while (false);
+
+                                    if (this.cursor >= this.limit) {
+                                        break lab2;
+                                    }
+
+                                    this.cursor++;
+                                }
+                            } while (false);
+
+                            break lab1;
+                        } while (false);
+
+                        this.cursor = v_2;
+
+                        if (!this.out_grouping$esjava$3(portugueseStemmer.g_v, 97, 250)) {
+                            break lab0;
+                        }
+
+                        lab9: do {
+                            v_6 = this.cursor;
+
+                            lab10: do {
+                                if (!this.out_grouping$esjava$3(portugueseStemmer.g_v, 97, 250)) {
+                                    break lab10;
+                                }
+
+                                golab11: while (true) {
+                                    lab12: do {
+                                        if (!this.in_grouping$esjava$3(portugueseStemmer.g_v, 97, 250)) {
+                                            break lab12;
+                                        }
+
+                                        break golab11;
+                                    } while (false);
+
+                                    if (this.cursor >= this.limit) {
+                                        break lab10;
+                                    }
+
+                                    this.cursor++;
+                                }
+
+                                break lab9;
+                            } while (false);
+
+                            this.cursor = v_6;
+
+                            if (!this.in_grouping$esjava$3(portugueseStemmer.g_v, 97, 250)) {
+                                break lab0;
+                            }
+
+                            if (this.cursor >= this.limit) {
+                                break lab0;
+                            }
+
+                            this.cursor++;
+                        } while (false);
+                    } while (false);
+
+                    this.I_pV = this.cursor;
+                } while (false);
+
+                this.cursor = v_1;
+                v_8 = this.cursor;
+
+                lab13: do {
+                    golab14: while (true) {
+                        lab15: do {
+                            if (!this.in_grouping$esjava$3(portugueseStemmer.g_v, 97, 250)) {
+                                break lab15;
+                            }
+
+                            break golab14;
+                        } while (false);
+
+                        if (this.cursor >= this.limit) {
+                            break lab13;
+                        }
+
+                        this.cursor++;
+                    }
+
+                    golab16: while (true) {
+                        lab17: do {
+                            if (!this.out_grouping$esjava$3(portugueseStemmer.g_v, 97, 250)) {
+                                break lab17;
+                            }
+
+                            break golab16;
+                        } while (false);
+
+                        if (this.cursor >= this.limit) {
+                            break lab13;
+                        }
+
+                        this.cursor++;
+                    }
+
+                    this.I_p1 = this.cursor;
+
+                    golab18: while (true) {
+                        lab19: do {
+                            if (!this.in_grouping$esjava$3(portugueseStemmer.g_v, 97, 250)) {
+                                break lab19;
+                            }
+
+                            break golab18;
+                        } while (false);
+
+                        if (this.cursor >= this.limit) {
+                            break lab13;
+                        }
+
+                        this.cursor++;
+                    }
+
+                    golab20: while (true) {
+                        lab21: do {
+                            if (!this.out_grouping$esjava$3(portugueseStemmer.g_v, 97, 250)) {
+                                break lab21;
+                            }
+
+                            break golab20;
+                        } while (false);
+
+                        if (this.cursor >= this.limit) {
+                            break lab13;
+                        }
+
+                        this.cursor++;
+                    }
+
+                    this.I_p2 = this.cursor;
+                } while (false);
+
+                this.cursor = v_8;
+                return true;
+            }
+        }, {
+            key: 'r_postlude$esjava$0',
+            value: function r_postlude$esjava$0() {
+                var among_var = undefined;
+                var v_1 = undefined;
+
+                replab0: while (true) {
+                    v_1 = this.cursor;
+
+                    lab1: do {
+                        this.bra = this.cursor;
+                        among_var = this.find_among$esjava$1(portugueseStemmer.a_1);
+
+                        if (among_var === 0) {
+                            break lab1;
+                        }
+
+                        this.ket = this.cursor;
+
+                        switch (among_var) {
+                            case 0:
+                                break lab1;
+
+                            case 1:
+                                this.slice_from$esjava$1('\u00E3');
+                                break;
+
+                            case 2:
+                                this.slice_from$esjava$1('\u00F5');
+                                break;
+
+                            case 3:
+                                if (this.cursor >= this.limit) {
+                                    break lab1;
+                                }
+
+                                this.cursor++;
+                                break;
+                        }
+
+                        continue replab0;
+                    } while (false);
+
+                    this.cursor = v_1;
+                    break replab0;
+                }
+
+                return true;
+            }
+        }, {
+            key: 'r_RV$esjava$0',
+            value: function r_RV$esjava$0() {
+                if (!(this.I_pV <= this.cursor)) {
+                    return false;
+                }
+
+                return true;
+            }
+        }, {
+            key: 'r_R1$esjava$0',
+            value: function r_R1$esjava$0() {
+                if (!(this.I_p1 <= this.cursor)) {
+                    return false;
+                }
+
+                return true;
+            }
+        }, {
+            key: 'r_R2$esjava$0',
+            value: function r_R2$esjava$0() {
+                if (!(this.I_p2 <= this.cursor)) {
+                    return false;
+                }
+
+                return true;
+            }
+        }, {
+            key: 'r_standard_suffix$esjava$0',
+            value: function r_standard_suffix$esjava$0() {
+                var among_var = undefined;
+                var v_1 = undefined;
+                var v_2 = undefined;
+                var v_3 = undefined;
+                var v_4 = undefined;
+                this.ket = this.cursor;
+                among_var = this.find_among_b$esjava$1(portugueseStemmer.a_5);
+
+                if (among_var === 0) {
+                    return false;
+                }
+
+                this.bra = this.cursor;
+
+                switch (among_var) {
+                    case 0:
+                        return false;
+
+                    case 1:
+                        if (!this.r_R2$esjava$0()) {
+                            return false;
+                        }
+
+                        this.slice_del$esjava$0();
+                        break;
+
+                    case 2:
+                        if (!this.r_R2$esjava$0()) {
+                            return false;
+                        }
+
+                        this.slice_from$esjava$1("log");
+                        break;
+
+                    case 3:
+                        if (!this.r_R2$esjava$0()) {
+                            return false;
+                        }
+
+                        this.slice_from$esjava$1("u");
+                        break;
+
+                    case 4:
+                        if (!this.r_R2$esjava$0()) {
+                            return false;
+                        }
+
+                        this.slice_from$esjava$1("ente");
+                        break;
+
+                    case 5:
+                        if (!this.r_R1$esjava$0()) {
+                            return false;
+                        }
+
+                        this.slice_del$esjava$0();
+                        v_1 = this.limit - this.cursor;
+
+                        lab0: do {
+                            this.ket = this.cursor;
+                            among_var = this.find_among_b$esjava$1(portugueseStemmer.a_2);
+
+                            if (among_var === 0) {
+                                this.cursor = this.limit - v_1;
+                                break lab0;
+                            }
+
+                            this.bra = this.cursor;
+
+                            if (!this.r_R2$esjava$0()) {
+                                this.cursor = this.limit - v_1;
+                                break lab0;
+                            }
+
+                            this.slice_del$esjava$0();
+
+                            switch (among_var) {
+                                case 0:
+                                    this.cursor = this.limit - v_1;
+                                    break lab0;
+
+                                case 1:
+                                    this.ket = this.cursor;
+
+                                    if (!this.eq_s_b$esjava$1("at")) {
+                                        this.cursor = this.limit - v_1;
+                                        break lab0;
+                                    }
+
+                                    this.bra = this.cursor;
+
+                                    if (!this.r_R2$esjava$0()) {
+                                        this.cursor = this.limit - v_1;
+                                        break lab0;
+                                    }
+
+                                    this.slice_del$esjava$0();
+                                    break;
+                            }
+                        } while (false);
+
+                        break;
+
+                    case 6:
+                        if (!this.r_R2$esjava$0()) {
+                            return false;
+                        }
+
+                        this.slice_del$esjava$0();
+                        v_2 = this.limit - this.cursor;
+
+                        lab1: do {
+                            this.ket = this.cursor;
+                            among_var = this.find_among_b$esjava$1(portugueseStemmer.a_3);
+
+                            if (among_var === 0) {
+                                this.cursor = this.limit - v_2;
+                                break lab1;
+                            }
+
+                            this.bra = this.cursor;
+
+                            switch (among_var) {
+                                case 0:
+                                    this.cursor = this.limit - v_2;
+                                    break lab1;
+
+                                case 1:
+                                    if (!this.r_R2$esjava$0()) {
+                                        this.cursor = this.limit - v_2;
+                                        break lab1;
+                                    }
+
+                                    this.slice_del$esjava$0();
+                                    break;
+                            }
+                        } while (false);
+
+                        break;
+
+                    case 7:
+                        if (!this.r_R2$esjava$0()) {
+                            return false;
+                        }
+
+                        this.slice_del$esjava$0();
+                        v_3 = this.limit - this.cursor;
+
+                        lab2: do {
+                            this.ket = this.cursor;
+                            among_var = this.find_among_b$esjava$1(portugueseStemmer.a_4);
+
+                            if (among_var === 0) {
+                                this.cursor = this.limit - v_3;
+                                break lab2;
+                            }
+
+                            this.bra = this.cursor;
+
+                            switch (among_var) {
+                                case 0:
+                                    this.cursor = this.limit - v_3;
+                                    break lab2;
+
+                                case 1:
+                                    if (!this.r_R2$esjava$0()) {
+                                        this.cursor = this.limit - v_3;
+                                        break lab2;
+                                    }
+
+                                    this.slice_del$esjava$0();
+                                    break;
+                            }
+                        } while (false);
+
+                        break;
+
+                    case 8:
+                        if (!this.r_R2$esjava$0()) {
+                            return false;
+                        }
+
+                        this.slice_del$esjava$0();
+                        v_4 = this.limit - this.cursor;
+
+                        lab3: do {
+                            this.ket = this.cursor;
+
+                            if (!this.eq_s_b$esjava$1("at")) {
+                                this.cursor = this.limit - v_4;
+                                break lab3;
+                            }
+
+                            this.bra = this.cursor;
+
+                            if (!this.r_R2$esjava$0()) {
+                                this.cursor = this.limit - v_4;
+                                break lab3;
+                            }
+
+                            this.slice_del$esjava$0();
+                        } while (false);
+
+                        break;
+
+                    case 9:
+                        if (!this.r_RV$esjava$0()) {
+                            return false;
+                        }
+
+                        if (!this.eq_s_b$esjava$1("e")) {
+                            return false;
+                        }
+
+                        this.slice_from$esjava$1("ir");
+                        break;
+                }
+
+                return true;
+            }
+        }, {
+            key: 'r_verb_suffix$esjava$0',
+            value: function r_verb_suffix$esjava$0() {
+                var among_var = undefined;
+                var v_1 = undefined;
+                var v_2 = undefined;
+                v_1 = this.limit - this.cursor;
+
+                if (this.cursor < this.I_pV) {
+                    return false;
+                }
+
+                this.cursor = this.I_pV;
+                v_2 = this.limit_backward;
+                this.limit_backward = this.cursor;
+                this.cursor = this.limit - v_1;
+                this.ket = this.cursor;
+                among_var = this.find_among_b$esjava$1(portugueseStemmer.a_6);
+
+                if (among_var === 0) {
+                    this.limit_backward = v_2;
+                    return false;
+                }
+
+                this.bra = this.cursor;
+
+                switch (among_var) {
+                    case 0:
+                        this.limit_backward = v_2;
+                        return false;
+
+                    case 1:
+                        this.slice_del$esjava$0();
+                        break;
+                }
+
+                this.limit_backward = v_2;
+                return true;
+            }
+        }, {
+            key: 'r_residual_suffix$esjava$0',
+            value: function r_residual_suffix$esjava$0() {
+                var among_var = undefined;
+                this.ket = this.cursor;
+                among_var = this.find_among_b$esjava$1(portugueseStemmer.a_7);
+
+                if (among_var === 0) {
+                    return false;
+                }
+
+                this.bra = this.cursor;
+
+                switch (among_var) {
+                    case 0:
+                        return false;
+
+                    case 1:
+                        if (!this.r_RV$esjava$0()) {
+                            return false;
+                        }
+
+                        this.slice_del$esjava$0();
+                        break;
+                }
+
+                return true;
+            }
+        }, {
+            key: 'r_residual_form$esjava$0',
+            value: function r_residual_form$esjava$0() {
+                var among_var = undefined;
+                var v_1 = undefined;
+                var v_2 = undefined;
+                var v_3 = undefined;
+                this.ket = this.cursor;
+                among_var = this.find_among_b$esjava$1(portugueseStemmer.a_8);
+
+                if (among_var === 0) {
+                    return false;
+                }
+
+                this.bra = this.cursor;
+
+                switch (among_var) {
+                    case 0:
+                        return false;
+
+                    case 1:
+                        if (!this.r_RV$esjava$0()) {
+                            return false;
+                        }
+
+                        this.slice_del$esjava$0();
+                        this.ket = this.cursor;
+
+                        lab0: do {
+                            v_1 = this.limit - this.cursor;
+
+                            lab1: do {
+                                if (!this.eq_s_b$esjava$1("u")) {
+                                    break lab1;
+                                }
+
+                                this.bra = this.cursor;
+                                v_2 = this.limit - this.cursor;
+
+                                if (!this.eq_s_b$esjava$1("g")) {
+                                    break lab1;
+                                }
+
+                                this.cursor = this.limit - v_2;
+                                break lab0;
+                            } while (false);
+
+                            this.cursor = this.limit - v_1;
+
+                            if (!this.eq_s_b$esjava$1("i")) {
+                                return false;
+                            }
+
+                            this.bra = this.cursor;
+                            v_3 = this.limit - this.cursor;
+
+                            if (!this.eq_s_b$esjava$1("c")) {
+                                return false;
+                            }
+
+                            this.cursor = this.limit - v_3;
+                        } while (false);
+
+                        if (!this.r_RV$esjava$0()) {
+                            return false;
+                        }
+
+                        this.slice_del$esjava$0();
+                        break;
+
+                    case 2:
+                        this.slice_from$esjava$1("c");
+                        break;
+                }
+
+                return true;
+            }
+        }, {
+            key: 'stem$esjava$0',
+            value: function stem$esjava$0() {
+                var v_1 = undefined;
+                var v_2 = undefined;
+                var v_3 = undefined;
+                var v_4 = undefined;
+                var v_5 = undefined;
+                var v_6 = undefined;
+                var v_7 = undefined;
+                var v_8 = undefined;
+                var v_9 = undefined;
+                var v_10 = undefined;
+                v_1 = this.cursor;
+
+                lab0: do {
+                    if (!this.r_prelude$esjava$0()) {
+                        break lab0;
+                    }
+                } while (false);
+
+                this.cursor = v_1;
+                v_2 = this.cursor;
+
+                lab1: do {
+                    if (!this.r_mark_regions$esjava$0()) {
+                        break lab1;
+                    }
+                } while (false);
+
+                this.cursor = v_2;
+                this.limit_backward = this.cursor;
+                this.cursor = this.limit;
+                v_3 = this.limit - this.cursor;
+
+                lab2: do {
+                    lab3: do {
+                        v_4 = this.limit - this.cursor;
+
+                        lab4: do {
+                            v_5 = this.limit - this.cursor;
+
+                            lab5: do {
+                                v_6 = this.limit - this.cursor;
+
+                                lab6: do {
+                                    if (!this.r_standard_suffix$esjava$0()) {
+                                        break lab6;
+                                    }
+
+                                    break lab5;
+                                } while (false);
+
+                                this.cursor = this.limit - v_6;
+
+                                if (!this.r_verb_suffix$esjava$0()) {
+                                    break lab4;
+                                }
+                            } while (false);
+
+                            this.cursor = this.limit - v_5;
+                            v_7 = this.limit - this.cursor;
+
+                            lab7: do {
+                                this.ket = this.cursor;
+
+                                if (!this.eq_s_b$esjava$1("i")) {
+                                    break lab7;
+                                }
+
+                                this.bra = this.cursor;
+                                v_8 = this.limit - this.cursor;
+
+                                if (!this.eq_s_b$esjava$1("c")) {
+                                    break lab7;
+                                }
+
+                                this.cursor = this.limit - v_8;
+
+                                if (!this.r_RV$esjava$0()) {
+                                    break lab7;
+                                }
+
+                                this.slice_del$esjava$0();
+                            } while (false);
+
+                            this.cursor = this.limit - v_7;
+                            break lab3;
+                        } while (false);
+
+                        this.cursor = this.limit - v_4;
+
+                        if (!this.r_residual_suffix$esjava$0()) {
+                            break lab2;
+                        }
+                    } while (false);
+                } while (false);
+
+                this.cursor = this.limit - v_3;
+                v_9 = this.limit - this.cursor;
+
+                lab8: do {
+                    if (!this.r_residual_form$esjava$0()) {
+                        break lab8;
+                    }
+                } while (false);
+
+                this.cursor = this.limit - v_9;
+                this.cursor = this.limit_backward;
+                v_10 = this.cursor;
+
+                lab9: do {
+                    if (!this.r_postlude$esjava$0()) {
+                        break lab9;
+                    }
+                } while (false);
+
+                this.cursor = v_10;
+                return true;
+            }
+        }, {
+            key: 'stem',
+            value: function stem() {
+                var _get43;
+
+                for (var _len42 = arguments.length, args = Array(_len42), _key42 = 0; _key42 < _len42; _key42++) {
+                    args[_key42] = arguments[_key42];
+                }
+
+                switch (args.length) {
+                    case 0:
+                        return this.stem$esjava$0.apply(this, args);
+                }
+
+                return (_get43 = _get(Object.getPrototypeOf(portugueseStemmer.prototype), 'stem', this)).call.apply(_get43, [this].concat(args));
+            }
+        }, {
+            key: 'I_p2',
+            get: function get() {
+                return Object.prototype.hasOwnProperty.call(this, '_$esjava$I_p2') ? this._$esjava$I_p2 : this._$esjava$I_p2 = 0;
+            },
+            set: function set(v) {
+                this._$esjava$I_p2 = v;
+            }
+        }, {
+            key: 'I_p1',
+            get: function get() {
+                return Object.prototype.hasOwnProperty.call(this, '_$esjava$I_p1') ? this._$esjava$I_p1 : this._$esjava$I_p1 = 0;
+            },
+            set: function set(v) {
+                this._$esjava$I_p1 = v;
+            }
+        }, {
+            key: 'I_pV',
+            get: function get() {
+                return Object.prototype.hasOwnProperty.call(this, '_$esjava$I_pV') ? this._$esjava$I_pV : this._$esjava$I_pV = 0;
+            },
+            set: function set(v) {
+                this._$esjava$I_pV = v;
+            }
+        }], [{
+            key: 'a_0',
+            get: function get() {
+                delete portugueseStemmer.a_0;
+                return portugueseStemmer.a_0 = [new Among("", -1, 3), new Among('\u00E3', 0, 1), new Among('\u00F5', 0, 2)];
+            }
+        }, {
+            key: 'a_1',
+            get: function get() {
+                delete portugueseStemmer.a_1;
+                return portugueseStemmer.a_1 = [new Among("", -1, 3), new Among("a~", 0, 1), new Among("o~", 0, 2)];
+            }
+        }, {
+            key: 'a_2',
+            get: function get() {
+                delete portugueseStemmer.a_2;
+                return portugueseStemmer.a_2 = [new Among("ic", -1, -1), new Among("ad", -1, -1), new Among("os", -1, -1), new Among("iv", -1, 1)];
+            }
+        }, {
+            key: 'a_3',
+            get: function get() {
+                delete portugueseStemmer.a_3;
+                return portugueseStemmer.a_3 = [new Among("ante", -1, 1), new Among("avel", -1, 1), new Among('\u00EDvel', -1, 1)];
+            }
+        }, {
+            key: 'a_4',
+            get: function get() {
+                delete portugueseStemmer.a_4;
+                return portugueseStemmer.a_4 = [new Among("ic", -1, 1), new Among("abil", -1, 1), new Among("iv", -1, 1)];
+            }
+        }, {
+            key: 'a_5',
+            get: function get() {
+                delete portugueseStemmer.a_5;
+                return portugueseStemmer.a_5 = [new Among("ica", -1, 1), new Among('\u00E2ncia', -1, 1), new Among('\u00EAncia', -1, 4), new Among("logia", -1, 2), new Among("ira", -1, 9), new Among("adora", -1, 1), new Among("osa", -1, 1), new Among("ista", -1, 1), new Among("iva", -1, 8), new Among("eza", -1, 1), new Among("idade", -1, 7), new Among("ante", -1, 1), new Among("mente", -1, 6), new Among("amente", 12, 5), new Among('\u00E1vel', -1, 1), new Among('\u00EDvel', -1, 1), new Among("ico", -1, 1), new Among("ismo", -1, 1), new Among("oso", -1, 1), new Among("amento", -1, 1), new Among("imento", -1, 1), new Among("ivo", -1, 8), new Among('a\u00E7a~o', -1, 1), new Among('u\u00E7a~o', -1, 3), new Among("ador", -1, 1), new Among("icas", -1, 1), new Among('\u00EAncias', -1, 4), new Among("logias", -1, 2), new Among("iras", -1, 9), new Among("adoras", -1, 1), new Among("osas", -1, 1), new Among("istas", -1, 1), new Among("ivas", -1, 8), new Among("ezas", -1, 1), new Among("idades", -1, 7), new Among("adores", -1, 1), new Among("antes", -1, 1), new Among('a\u00E7o~es', -1, 1), new Among('u\u00E7o~es', -1, 3), new Among("icos", -1, 1), new Among("ismos", -1, 1), new Among("osos", -1, 1), new Among("amentos", -1, 1), new Among("imentos", -1, 1), new Among("ivos", -1, 8)];
+            }
+        }, {
+            key: 'a_6',
+            get: function get() {
+                delete portugueseStemmer.a_6;
+                return portugueseStemmer.a_6 = [new Among("ada", -1, 1), new Among("ida", -1, 1), new Among("ia", -1, 1), new Among("aria", 2, 1), new Among("eria", 2, 1), new Among("iria", 2, 1), new Among("ara", -1, 1), new Among("era", -1, 1), new Among("ira", -1, 1), new Among("ava", -1, 1), new Among("asse", -1, 1), new Among("esse", -1, 1), new Among("isse", -1, 1), new Among("aste", -1, 1), new Among("este", -1, 1), new Among("iste", -1, 1), new Among("ei", -1, 1), new Among("arei", 16, 1), new Among("erei", 16, 1), new Among("irei", 16, 1), new Among("am", -1, 1), new Among("iam", 20, 1), new Among("ariam", 21, 1), new Among("eriam", 21, 1), new Among("iriam", 21, 1), new Among("aram", 20, 1), new Among("eram", 20, 1), new Among("iram", 20, 1), new Among("avam", 20, 1), new Among("em", -1, 1), new Among("arem", 29, 1), new Among("erem", 29, 1), new Among("irem", 29, 1), new Among("assem", 29, 1), new Among("essem", 29, 1), new Among("issem", 29, 1), new Among("ado", -1, 1), new Among("ido", -1, 1), new Among("ando", -1, 1), new Among("endo", -1, 1), new Among("indo", -1, 1), new Among("ara~o", -1, 1), new Among("era~o", -1, 1), new Among("ira~o", -1, 1), new Among("ar", -1, 1), new Among("er", -1, 1), new Among("ir", -1, 1), new Among("as", -1, 1), new Among("adas", 47, 1), new Among("idas", 47, 1), new Among("ias", 47, 1), new Among("arias", 50, 1), new Among("erias", 50, 1), new Among("irias", 50, 1), new Among("aras", 47, 1), new Among("eras", 47, 1), new Among("iras", 47, 1), new Among("avas", 47, 1), new Among("es", -1, 1), new Among("ardes", 58, 1), new Among("erdes", 58, 1), new Among("irdes", 58, 1), new Among("ares", 58, 1), new Among("eres", 58, 1), new Among("ires", 58, 1), new Among("asses", 58, 1), new Among("esses", 58, 1), new Among("isses", 58, 1), new Among("astes", 58, 1), new Among("estes", 58, 1), new Among("istes", 58, 1), new Among("is", -1, 1), new Among("ais", 71, 1), new Among("eis", 71, 1), new Among("areis", 73, 1), new Among("ereis", 73, 1), new Among("ireis", 73, 1), new Among('\u00E1reis', 73, 1), new Among('\u00E9reis', 73, 1), new Among('\u00EDreis', 73, 1), new Among('\u00E1sseis', 73, 1), new Among('\u00E9sseis', 73, 1), new Among('\u00EDsseis', 73, 1), new Among('\u00E1veis', 73, 1), new Among('\u00EDeis', 73, 1), new Among('ar\u00EDeis', 84, 1), new Among('er\u00EDeis', 84, 1), new Among('ir\u00EDeis', 84, 1), new Among("ados", -1, 1), new Among("idos", -1, 1), new Among("amos", -1, 1), new Among('\u00E1ramos', 90, 1), new Among('\u00E9ramos', 90, 1), new Among('\u00EDramos', 90, 1), new Among('\u00E1vamos', 90, 1), new Among('\u00EDamos', 90, 1), new Among('ar\u00EDamos', 95, 1), new Among('er\u00EDamos', 95, 1), new Among('ir\u00EDamos', 95, 1), new Among("emos", -1, 1), new Among("aremos", 99, 1), new Among("eremos", 99, 1), new Among("iremos", 99, 1), new Among('\u00E1ssemos', 99, 1), new Among('\u00EAssemos', 99, 1), new Among('\u00EDssemos', 99, 1), new Among("imos", -1, 1), new Among("armos", -1, 1), new Among("ermos", -1, 1), new Among("irmos", -1, 1), new Among('\u00E1mos', -1, 1), new Among('ar\u00E1s', -1, 1), new Among('er\u00E1s', -1, 1), new Among('ir\u00E1s', -1, 1), new Among("eu", -1, 1), new Among("iu", -1, 1), new Among("ou", -1, 1), new Among('ar\u00E1', -1, 1), new Among('er\u00E1', -1, 1), new Among('ir\u00E1', -1, 1)];
+            }
+        }, {
+            key: 'a_7',
+            get: function get() {
+                delete portugueseStemmer.a_7;
+                return portugueseStemmer.a_7 = [new Among("a", -1, 1), new Among("i", -1, 1), new Among("o", -1, 1), new Among("os", -1, 1), new Among('\u00E1', -1, 1), new Among('\u00ED', -1, 1), new Among('\u00F3', -1, 1)];
+            }
+        }, {
+            key: 'a_8',
+            get: function get() {
+                delete portugueseStemmer.a_8;
+                return portugueseStemmer.a_8 = [new Among("e", -1, 1), new Among('\u00E7', -1, 2), new Among('\u00E9', -1, 1), new Among('\u00EA', -1, 1)];
+            }
+        }, {
+            key: 'g_v',
+            get: function get() {
+                delete portugueseStemmer.g_v;
+                return portugueseStemmer.g_v = [17, 65, 16, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 19, 12, 2];
+            }
+        }]);
+
+        return portugueseStemmer;
+    }(SnowballStemmer);
+
     var russianStemmer = function (_SnowballStemmer19) {
         _inherits(russianStemmer, _SnowballStemmer19);
 
@@ -2754,10 +5699,982 @@ Wordbook.Snowball = (function () {
         return russianStemmer;
     }(SnowballStemmer);
 
+    var spanishStemmer = function (_SnowballStemmer21) {
+        _inherits(spanishStemmer, _SnowballStemmer21);
+
+        function spanishStemmer() {
+            _classCallCheck(this, spanishStemmer);
+
+            return _possibleConstructorReturn(this, Object.getPrototypeOf(spanishStemmer).apply(this, arguments));
+        }
+
+        _createClass(spanishStemmer, [{
+            key: 'r_mark_regions$esjava$0',
+            value: function r_mark_regions$esjava$0() {
+                var v_1 = undefined;
+                var v_2 = undefined;
+                var v_3 = undefined;
+                var v_6 = undefined;
+                var v_8 = undefined;
+                this.I_pV = this.limit;
+                this.I_p1 = this.limit;
+                this.I_p2 = this.limit;
+                v_1 = this.cursor;
+
+                lab0: do {
+                    lab1: do {
+                        v_2 = this.cursor;
+
+                        lab2: do {
+                            if (!this.in_grouping$esjava$3(spanishStemmer.g_v, 97, 252)) {
+                                break lab2;
+                            }
+
+                            lab3: do {
+                                v_3 = this.cursor;
+
+                                lab4: do {
+                                    if (!this.out_grouping$esjava$3(spanishStemmer.g_v, 97, 252)) {
+                                        break lab4;
+                                    }
+
+                                    golab5: while (true) {
+                                        lab6: do {
+                                            if (!this.in_grouping$esjava$3(spanishStemmer.g_v, 97, 252)) {
+                                                break lab6;
+                                            }
+
+                                            break golab5;
+                                        } while (false);
+
+                                        if (this.cursor >= this.limit) {
+                                            break lab4;
+                                        }
+
+                                        this.cursor++;
+                                    }
+
+                                    break lab3;
+                                } while (false);
+
+                                this.cursor = v_3;
+
+                                if (!this.in_grouping$esjava$3(spanishStemmer.g_v, 97, 252)) {
+                                    break lab2;
+                                }
+
+                                golab7: while (true) {
+                                    lab8: do {
+                                        if (!this.out_grouping$esjava$3(spanishStemmer.g_v, 97, 252)) {
+                                            break lab8;
+                                        }
+
+                                        break golab7;
+                                    } while (false);
+
+                                    if (this.cursor >= this.limit) {
+                                        break lab2;
+                                    }
+
+                                    this.cursor++;
+                                }
+                            } while (false);
+
+                            break lab1;
+                        } while (false);
+
+                        this.cursor = v_2;
+
+                        if (!this.out_grouping$esjava$3(spanishStemmer.g_v, 97, 252)) {
+                            break lab0;
+                        }
+
+                        lab9: do {
+                            v_6 = this.cursor;
+
+                            lab10: do {
+                                if (!this.out_grouping$esjava$3(spanishStemmer.g_v, 97, 252)) {
+                                    break lab10;
+                                }
+
+                                golab11: while (true) {
+                                    lab12: do {
+                                        if (!this.in_grouping$esjava$3(spanishStemmer.g_v, 97, 252)) {
+                                            break lab12;
+                                        }
+
+                                        break golab11;
+                                    } while (false);
+
+                                    if (this.cursor >= this.limit) {
+                                        break lab10;
+                                    }
+
+                                    this.cursor++;
+                                }
+
+                                break lab9;
+                            } while (false);
+
+                            this.cursor = v_6;
+
+                            if (!this.in_grouping$esjava$3(spanishStemmer.g_v, 97, 252)) {
+                                break lab0;
+                            }
+
+                            if (this.cursor >= this.limit) {
+                                break lab0;
+                            }
+
+                            this.cursor++;
+                        } while (false);
+                    } while (false);
+
+                    this.I_pV = this.cursor;
+                } while (false);
+
+                this.cursor = v_1;
+                v_8 = this.cursor;
+
+                lab13: do {
+                    golab14: while (true) {
+                        lab15: do {
+                            if (!this.in_grouping$esjava$3(spanishStemmer.g_v, 97, 252)) {
+                                break lab15;
+                            }
+
+                            break golab14;
+                        } while (false);
+
+                        if (this.cursor >= this.limit) {
+                            break lab13;
+                        }
+
+                        this.cursor++;
+                    }
+
+                    golab16: while (true) {
+                        lab17: do {
+                            if (!this.out_grouping$esjava$3(spanishStemmer.g_v, 97, 252)) {
+                                break lab17;
+                            }
+
+                            break golab16;
+                        } while (false);
+
+                        if (this.cursor >= this.limit) {
+                            break lab13;
+                        }
+
+                        this.cursor++;
+                    }
+
+                    this.I_p1 = this.cursor;
+
+                    golab18: while (true) {
+                        lab19: do {
+                            if (!this.in_grouping$esjava$3(spanishStemmer.g_v, 97, 252)) {
+                                break lab19;
+                            }
+
+                            break golab18;
+                        } while (false);
+
+                        if (this.cursor >= this.limit) {
+                            break lab13;
+                        }
+
+                        this.cursor++;
+                    }
+
+                    golab20: while (true) {
+                        lab21: do {
+                            if (!this.out_grouping$esjava$3(spanishStemmer.g_v, 97, 252)) {
+                                break lab21;
+                            }
+
+                            break golab20;
+                        } while (false);
+
+                        if (this.cursor >= this.limit) {
+                            break lab13;
+                        }
+
+                        this.cursor++;
+                    }
+
+                    this.I_p2 = this.cursor;
+                } while (false);
+
+                this.cursor = v_8;
+                return true;
+            }
+        }, {
+            key: 'r_postlude$esjava$0',
+            value: function r_postlude$esjava$0() {
+                var among_var = undefined;
+                var v_1 = undefined;
+
+                replab0: while (true) {
+                    v_1 = this.cursor;
+
+                    lab1: do {
+                        this.bra = this.cursor;
+                        among_var = this.find_among$esjava$1(spanishStemmer.a_0);
+
+                        if (among_var === 0) {
+                            break lab1;
+                        }
+
+                        this.ket = this.cursor;
+
+                        switch (among_var) {
+                            case 0:
+                                break lab1;
+
+                            case 1:
+                                this.slice_from$esjava$1("a");
+                                break;
+
+                            case 2:
+                                this.slice_from$esjava$1("e");
+                                break;
+
+                            case 3:
+                                this.slice_from$esjava$1("i");
+                                break;
+
+                            case 4:
+                                this.slice_from$esjava$1("o");
+                                break;
+
+                            case 5:
+                                this.slice_from$esjava$1("u");
+                                break;
+
+                            case 6:
+                                if (this.cursor >= this.limit) {
+                                    break lab1;
+                                }
+
+                                this.cursor++;
+                                break;
+                        }
+
+                        continue replab0;
+                    } while (false);
+
+                    this.cursor = v_1;
+                    break replab0;
+                }
+
+                return true;
+            }
+        }, {
+            key: 'r_RV$esjava$0',
+            value: function r_RV$esjava$0() {
+                if (!(this.I_pV <= this.cursor)) {
+                    return false;
+                }
+
+                return true;
+            }
+        }, {
+            key: 'r_R1$esjava$0',
+            value: function r_R1$esjava$0() {
+                if (!(this.I_p1 <= this.cursor)) {
+                    return false;
+                }
+
+                return true;
+            }
+        }, {
+            key: 'r_R2$esjava$0',
+            value: function r_R2$esjava$0() {
+                if (!(this.I_p2 <= this.cursor)) {
+                    return false;
+                }
+
+                return true;
+            }
+        }, {
+            key: 'r_attached_pronoun$esjava$0',
+            value: function r_attached_pronoun$esjava$0() {
+                var among_var = undefined;
+                this.ket = this.cursor;
+
+                if (this.find_among_b$esjava$1(spanishStemmer.a_1) === 0) {
+                    return false;
+                }
+
+                this.bra = this.cursor;
+                among_var = this.find_among_b$esjava$1(spanishStemmer.a_2);
+
+                if (among_var === 0) {
+                    return false;
+                }
+
+                if (!this.r_RV$esjava$0()) {
+                    return false;
+                }
+
+                switch (among_var) {
+                    case 0:
+                        return false;
+
+                    case 1:
+                        this.bra = this.cursor;
+                        this.slice_from$esjava$1("iendo");
+                        break;
+
+                    case 2:
+                        this.bra = this.cursor;
+                        this.slice_from$esjava$1("ando");
+                        break;
+
+                    case 3:
+                        this.bra = this.cursor;
+                        this.slice_from$esjava$1("ar");
+                        break;
+
+                    case 4:
+                        this.bra = this.cursor;
+                        this.slice_from$esjava$1("er");
+                        break;
+
+                    case 5:
+                        this.bra = this.cursor;
+                        this.slice_from$esjava$1("ir");
+                        break;
+
+                    case 6:
+                        this.slice_del$esjava$0();
+                        break;
+
+                    case 7:
+                        if (!this.eq_s_b$esjava$1("u")) {
+                            return false;
+                        }
+
+                        this.slice_del$esjava$0();
+                        break;
+                }
+
+                return true;
+            }
+        }, {
+            key: 'r_standard_suffix$esjava$0',
+            value: function r_standard_suffix$esjava$0() {
+                var among_var = undefined;
+                var v_1 = undefined;
+                var v_2 = undefined;
+                var v_3 = undefined;
+                var v_4 = undefined;
+                var v_5 = undefined;
+                this.ket = this.cursor;
+                among_var = this.find_among_b$esjava$1(spanishStemmer.a_6);
+
+                if (among_var === 0) {
+                    return false;
+                }
+
+                this.bra = this.cursor;
+
+                switch (among_var) {
+                    case 0:
+                        return false;
+
+                    case 1:
+                        if (!this.r_R2$esjava$0()) {
+                            return false;
+                        }
+
+                        this.slice_del$esjava$0();
+                        break;
+
+                    case 2:
+                        if (!this.r_R2$esjava$0()) {
+                            return false;
+                        }
+
+                        this.slice_del$esjava$0();
+                        v_1 = this.limit - this.cursor;
+
+                        lab0: do {
+                            this.ket = this.cursor;
+
+                            if (!this.eq_s_b$esjava$1("ic")) {
+                                this.cursor = this.limit - v_1;
+                                break lab0;
+                            }
+
+                            this.bra = this.cursor;
+
+                            if (!this.r_R2$esjava$0()) {
+                                this.cursor = this.limit - v_1;
+                                break lab0;
+                            }
+
+                            this.slice_del$esjava$0();
+                        } while (false);
+
+                        break;
+
+                    case 3:
+                        if (!this.r_R2$esjava$0()) {
+                            return false;
+                        }
+
+                        this.slice_from$esjava$1("log");
+                        break;
+
+                    case 4:
+                        if (!this.r_R2$esjava$0()) {
+                            return false;
+                        }
+
+                        this.slice_from$esjava$1("u");
+                        break;
+
+                    case 5:
+                        if (!this.r_R2$esjava$0()) {
+                            return false;
+                        }
+
+                        this.slice_from$esjava$1("ente");
+                        break;
+
+                    case 6:
+                        if (!this.r_R1$esjava$0()) {
+                            return false;
+                        }
+
+                        this.slice_del$esjava$0();
+                        v_2 = this.limit - this.cursor;
+
+                        lab1: do {
+                            this.ket = this.cursor;
+                            among_var = this.find_among_b$esjava$1(spanishStemmer.a_3);
+
+                            if (among_var === 0) {
+                                this.cursor = this.limit - v_2;
+                                break lab1;
+                            }
+
+                            this.bra = this.cursor;
+
+                            if (!this.r_R2$esjava$0()) {
+                                this.cursor = this.limit - v_2;
+                                break lab1;
+                            }
+
+                            this.slice_del$esjava$0();
+
+                            switch (among_var) {
+                                case 0:
+                                    this.cursor = this.limit - v_2;
+                                    break lab1;
+
+                                case 1:
+                                    this.ket = this.cursor;
+
+                                    if (!this.eq_s_b$esjava$1("at")) {
+                                        this.cursor = this.limit - v_2;
+                                        break lab1;
+                                    }
+
+                                    this.bra = this.cursor;
+
+                                    if (!this.r_R2$esjava$0()) {
+                                        this.cursor = this.limit - v_2;
+                                        break lab1;
+                                    }
+
+                                    this.slice_del$esjava$0();
+                                    break;
+                            }
+                        } while (false);
+
+                        break;
+
+                    case 7:
+                        if (!this.r_R2$esjava$0()) {
+                            return false;
+                        }
+
+                        this.slice_del$esjava$0();
+                        v_3 = this.limit - this.cursor;
+
+                        lab2: do {
+                            this.ket = this.cursor;
+                            among_var = this.find_among_b$esjava$1(spanishStemmer.a_4);
+
+                            if (among_var === 0) {
+                                this.cursor = this.limit - v_3;
+                                break lab2;
+                            }
+
+                            this.bra = this.cursor;
+
+                            switch (among_var) {
+                                case 0:
+                                    this.cursor = this.limit - v_3;
+                                    break lab2;
+
+                                case 1:
+                                    if (!this.r_R2$esjava$0()) {
+                                        this.cursor = this.limit - v_3;
+                                        break lab2;
+                                    }
+
+                                    this.slice_del$esjava$0();
+                                    break;
+                            }
+                        } while (false);
+
+                        break;
+
+                    case 8:
+                        if (!this.r_R2$esjava$0()) {
+                            return false;
+                        }
+
+                        this.slice_del$esjava$0();
+                        v_4 = this.limit - this.cursor;
+
+                        lab3: do {
+                            this.ket = this.cursor;
+                            among_var = this.find_among_b$esjava$1(spanishStemmer.a_5);
+
+                            if (among_var === 0) {
+                                this.cursor = this.limit - v_4;
+                                break lab3;
+                            }
+
+                            this.bra = this.cursor;
+
+                            switch (among_var) {
+                                case 0:
+                                    this.cursor = this.limit - v_4;
+                                    break lab3;
+
+                                case 1:
+                                    if (!this.r_R2$esjava$0()) {
+                                        this.cursor = this.limit - v_4;
+                                        break lab3;
+                                    }
+
+                                    this.slice_del$esjava$0();
+                                    break;
+                            }
+                        } while (false);
+
+                        break;
+
+                    case 9:
+                        if (!this.r_R2$esjava$0()) {
+                            return false;
+                        }
+
+                        this.slice_del$esjava$0();
+                        v_5 = this.limit - this.cursor;
+
+                        lab4: do {
+                            this.ket = this.cursor;
+
+                            if (!this.eq_s_b$esjava$1("at")) {
+                                this.cursor = this.limit - v_5;
+                                break lab4;
+                            }
+
+                            this.bra = this.cursor;
+
+                            if (!this.r_R2$esjava$0()) {
+                                this.cursor = this.limit - v_5;
+                                break lab4;
+                            }
+
+                            this.slice_del$esjava$0();
+                        } while (false);
+
+                        break;
+                }
+
+                return true;
+            }
+        }, {
+            key: 'r_y_verb_suffix$esjava$0',
+            value: function r_y_verb_suffix$esjava$0() {
+                var among_var = undefined;
+                var v_1 = undefined;
+                var v_2 = undefined;
+                v_1 = this.limit - this.cursor;
+
+                if (this.cursor < this.I_pV) {
+                    return false;
+                }
+
+                this.cursor = this.I_pV;
+                v_2 = this.limit_backward;
+                this.limit_backward = this.cursor;
+                this.cursor = this.limit - v_1;
+                this.ket = this.cursor;
+                among_var = this.find_among_b$esjava$1(spanishStemmer.a_7);
+
+                if (among_var === 0) {
+                    this.limit_backward = v_2;
+                    return false;
+                }
+
+                this.bra = this.cursor;
+                this.limit_backward = v_2;
+
+                switch (among_var) {
+                    case 0:
+                        return false;
+
+                    case 1:
+                        if (!this.eq_s_b$esjava$1("u")) {
+                            return false;
+                        }
+
+                        this.slice_del$esjava$0();
+                        break;
+                }
+
+                return true;
+            }
+        }, {
+            key: 'r_verb_suffix$esjava$0',
+            value: function r_verb_suffix$esjava$0() {
+                var among_var = undefined;
+                var v_1 = undefined;
+                var v_2 = undefined;
+                var v_3 = undefined;
+                var v_4 = undefined;
+                v_1 = this.limit - this.cursor;
+
+                if (this.cursor < this.I_pV) {
+                    return false;
+                }
+
+                this.cursor = this.I_pV;
+                v_2 = this.limit_backward;
+                this.limit_backward = this.cursor;
+                this.cursor = this.limit - v_1;
+                this.ket = this.cursor;
+                among_var = this.find_among_b$esjava$1(spanishStemmer.a_8);
+
+                if (among_var === 0) {
+                    this.limit_backward = v_2;
+                    return false;
+                }
+
+                this.bra = this.cursor;
+                this.limit_backward = v_2;
+
+                switch (among_var) {
+                    case 0:
+                        return false;
+
+                    case 1:
+                        v_3 = this.limit - this.cursor;
+
+                        lab0: do {
+                            if (!this.eq_s_b$esjava$1("u")) {
+                                this.cursor = this.limit - v_3;
+                                break lab0;
+                            }
+
+                            v_4 = this.limit - this.cursor;
+
+                            if (!this.eq_s_b$esjava$1("g")) {
+                                this.cursor = this.limit - v_3;
+                                break lab0;
+                            }
+
+                            this.cursor = this.limit - v_4;
+                        } while (false);
+
+                        this.bra = this.cursor;
+                        this.slice_del$esjava$0();
+                        break;
+
+                    case 2:
+                        this.slice_del$esjava$0();
+                        break;
+                }
+
+                return true;
+            }
+        }, {
+            key: 'r_residual_suffix$esjava$0',
+            value: function r_residual_suffix$esjava$0() {
+                var among_var = undefined;
+                var v_1 = undefined;
+                var v_2 = undefined;
+                this.ket = this.cursor;
+                among_var = this.find_among_b$esjava$1(spanishStemmer.a_9);
+
+                if (among_var === 0) {
+                    return false;
+                }
+
+                this.bra = this.cursor;
+
+                switch (among_var) {
+                    case 0:
+                        return false;
+
+                    case 1:
+                        if (!this.r_RV$esjava$0()) {
+                            return false;
+                        }
+
+                        this.slice_del$esjava$0();
+                        break;
+
+                    case 2:
+                        if (!this.r_RV$esjava$0()) {
+                            return false;
+                        }
+
+                        this.slice_del$esjava$0();
+                        v_1 = this.limit - this.cursor;
+
+                        lab0: do {
+                            this.ket = this.cursor;
+
+                            if (!this.eq_s_b$esjava$1("u")) {
+                                this.cursor = this.limit - v_1;
+                                break lab0;
+                            }
+
+                            this.bra = this.cursor;
+                            v_2 = this.limit - this.cursor;
+
+                            if (!this.eq_s_b$esjava$1("g")) {
+                                this.cursor = this.limit - v_1;
+                                break lab0;
+                            }
+
+                            this.cursor = this.limit - v_2;
+
+                            if (!this.r_RV$esjava$0()) {
+                                this.cursor = this.limit - v_1;
+                                break lab0;
+                            }
+
+                            this.slice_del$esjava$0();
+                        } while (false);
+
+                        break;
+                }
+
+                return true;
+            }
+        }, {
+            key: 'stem$esjava$0',
+            value: function stem$esjava$0() {
+                var v_1 = undefined;
+                var v_2 = undefined;
+                var v_3 = undefined;
+                var v_4 = undefined;
+                var v_5 = undefined;
+                var v_6 = undefined;
+                v_1 = this.cursor;
+
+                lab0: do {
+                    if (!this.r_mark_regions$esjava$0()) {
+                        break lab0;
+                    }
+                } while (false);
+
+                this.cursor = v_1;
+                this.limit_backward = this.cursor;
+                this.cursor = this.limit;
+                v_2 = this.limit - this.cursor;
+
+                lab1: do {
+                    if (!this.r_attached_pronoun$esjava$0()) {
+                        break lab1;
+                    }
+                } while (false);
+
+                this.cursor = this.limit - v_2;
+                v_3 = this.limit - this.cursor;
+
+                lab2: do {
+                    lab3: do {
+                        v_4 = this.limit - this.cursor;
+
+                        lab4: do {
+                            if (!this.r_standard_suffix$esjava$0()) {
+                                break lab4;
+                            }
+
+                            break lab3;
+                        } while (false);
+
+                        this.cursor = this.limit - v_4;
+
+                        lab5: do {
+                            if (!this.r_y_verb_suffix$esjava$0()) {
+                                break lab5;
+                            }
+
+                            break lab3;
+                        } while (false);
+
+                        this.cursor = this.limit - v_4;
+
+                        if (!this.r_verb_suffix$esjava$0()) {
+                            break lab2;
+                        }
+                    } while (false);
+                } while (false);
+
+                this.cursor = this.limit - v_3;
+                v_5 = this.limit - this.cursor;
+
+                lab6: do {
+                    if (!this.r_residual_suffix$esjava$0()) {
+                        break lab6;
+                    }
+                } while (false);
+
+                this.cursor = this.limit - v_5;
+                this.cursor = this.limit_backward;
+                v_6 = this.cursor;
+
+                lab7: do {
+                    if (!this.r_postlude$esjava$0()) {
+                        break lab7;
+                    }
+                } while (false);
+
+                this.cursor = v_6;
+                return true;
+            }
+        }, {
+            key: 'stem',
+            value: function stem() {
+                var _get47;
+
+                for (var _len46 = arguments.length, args = Array(_len46), _key46 = 0; _key46 < _len46; _key46++) {
+                    args[_key46] = arguments[_key46];
+                }
+
+                switch (args.length) {
+                    case 0:
+                        return this.stem$esjava$0.apply(this, args);
+                }
+
+                return (_get47 = _get(Object.getPrototypeOf(spanishStemmer.prototype), 'stem', this)).call.apply(_get47, [this].concat(args));
+            }
+        }, {
+            key: 'I_p2',
+            get: function get() {
+                return Object.prototype.hasOwnProperty.call(this, '_$esjava$I_p2') ? this._$esjava$I_p2 : this._$esjava$I_p2 = 0;
+            },
+            set: function set(v) {
+                this._$esjava$I_p2 = v;
+            }
+        }, {
+            key: 'I_p1',
+            get: function get() {
+                return Object.prototype.hasOwnProperty.call(this, '_$esjava$I_p1') ? this._$esjava$I_p1 : this._$esjava$I_p1 = 0;
+            },
+            set: function set(v) {
+                this._$esjava$I_p1 = v;
+            }
+        }, {
+            key: 'I_pV',
+            get: function get() {
+                return Object.prototype.hasOwnProperty.call(this, '_$esjava$I_pV') ? this._$esjava$I_pV : this._$esjava$I_pV = 0;
+            },
+            set: function set(v) {
+                this._$esjava$I_pV = v;
+            }
+        }], [{
+            key: 'a_0',
+            get: function get() {
+                delete spanishStemmer.a_0;
+                return spanishStemmer.a_0 = [new Among("", -1, 6), new Among('\u00E1', 0, 1), new Among('\u00E9', 0, 2), new Among('\u00ED', 0, 3), new Among('\u00F3', 0, 4), new Among('\u00FA', 0, 5)];
+            }
+        }, {
+            key: 'a_1',
+            get: function get() {
+                delete spanishStemmer.a_1;
+                return spanishStemmer.a_1 = [new Among("la", -1, -1), new Among("sela", 0, -1), new Among("le", -1, -1), new Among("me", -1, -1), new Among("se", -1, -1), new Among("lo", -1, -1), new Among("selo", 5, -1), new Among("las", -1, -1), new Among("selas", 7, -1), new Among("les", -1, -1), new Among("los", -1, -1), new Among("selos", 10, -1), new Among("nos", -1, -1)];
+            }
+        }, {
+            key: 'a_2',
+            get: function get() {
+                delete spanishStemmer.a_2;
+                return spanishStemmer.a_2 = [new Among("ando", -1, 6), new Among("iendo", -1, 6), new Among("yendo", -1, 7), new Among('\u00E1ndo', -1, 2), new Among('i\u00E9ndo', -1, 1), new Among("ar", -1, 6), new Among("er", -1, 6), new Among("ir", -1, 6), new Among('\u00E1r', -1, 3), new Among('\u00E9r', -1, 4), new Among('\u00EDr', -1, 5)];
+            }
+        }, {
+            key: 'a_3',
+            get: function get() {
+                delete spanishStemmer.a_3;
+                return spanishStemmer.a_3 = [new Among("ic", -1, -1), new Among("ad", -1, -1), new Among("os", -1, -1), new Among("iv", -1, 1)];
+            }
+        }, {
+            key: 'a_4',
+            get: function get() {
+                delete spanishStemmer.a_4;
+                return spanishStemmer.a_4 = [new Among("able", -1, 1), new Among("ible", -1, 1), new Among("ante", -1, 1)];
+            }
+        }, {
+            key: 'a_5',
+            get: function get() {
+                delete spanishStemmer.a_5;
+                return spanishStemmer.a_5 = [new Among("ic", -1, 1), new Among("abil", -1, 1), new Among("iv", -1, 1)];
+            }
+        }, {
+            key: 'a_6',
+            get: function get() {
+                delete spanishStemmer.a_6;
+                return spanishStemmer.a_6 = [new Among("ica", -1, 1), new Among("ancia", -1, 2), new Among("encia", -1, 5), new Among("adora", -1, 2), new Among("osa", -1, 1), new Among("ista", -1, 1), new Among("iva", -1, 9), new Among("anza", -1, 1), new Among('log\u00EDa', -1, 3), new Among("idad", -1, 8), new Among("able", -1, 1), new Among("ible", -1, 1), new Among("ante", -1, 2), new Among("mente", -1, 7), new Among("amente", 13, 6), new Among('aci\u00F3n', -1, 2), new Among('uci\u00F3n', -1, 4), new Among("ico", -1, 1), new Among("ismo", -1, 1), new Among("oso", -1, 1), new Among("amiento", -1, 1), new Among("imiento", -1, 1), new Among("ivo", -1, 9), new Among("ador", -1, 2), new Among("icas", -1, 1), new Among("ancias", -1, 2), new Among("encias", -1, 5), new Among("adoras", -1, 2), new Among("osas", -1, 1), new Among("istas", -1, 1), new Among("ivas", -1, 9), new Among("anzas", -1, 1), new Among('log\u00EDas', -1, 3), new Among("idades", -1, 8), new Among("ables", -1, 1), new Among("ibles", -1, 1), new Among("aciones", -1, 2), new Among("uciones", -1, 4), new Among("adores", -1, 2), new Among("antes", -1, 2), new Among("icos", -1, 1), new Among("ismos", -1, 1), new Among("osos", -1, 1), new Among("amientos", -1, 1), new Among("imientos", -1, 1), new Among("ivos", -1, 9)];
+            }
+        }, {
+            key: 'a_7',
+            get: function get() {
+                delete spanishStemmer.a_7;
+                return spanishStemmer.a_7 = [new Among("ya", -1, 1), new Among("ye", -1, 1), new Among("yan", -1, 1), new Among("yen", -1, 1), new Among("yeron", -1, 1), new Among("yendo", -1, 1), new Among("yo", -1, 1), new Among("yas", -1, 1), new Among("yes", -1, 1), new Among("yais", -1, 1), new Among("yamos", -1, 1), new Among('y\u00F3', -1, 1)];
+            }
+        }, {
+            key: 'a_8',
+            get: function get() {
+                delete spanishStemmer.a_8;
+                return spanishStemmer.a_8 = [new Among("aba", -1, 2), new Among("ada", -1, 2), new Among("ida", -1, 2), new Among("ara", -1, 2), new Among("iera", -1, 2), new Among('\u00EDa', -1, 2), new Among('ar\u00EDa', 5, 2), new Among('er\u00EDa', 5, 2), new Among('ir\u00EDa', 5, 2), new Among("ad", -1, 2), new Among("ed", -1, 2), new Among("id", -1, 2), new Among("ase", -1, 2), new Among("iese", -1, 2), new Among("aste", -1, 2), new Among("iste", -1, 2), new Among("an", -1, 2), new Among("aban", 16, 2), new Among("aran", 16, 2), new Among("ieran", 16, 2), new Among('\u00EDan', 16, 2), new Among('ar\u00EDan', 20, 2), new Among('er\u00EDan', 20, 2), new Among('ir\u00EDan', 20, 2), new Among("en", -1, 1), new Among("asen", 24, 2), new Among("iesen", 24, 2), new Among("aron", -1, 2), new Among("ieron", -1, 2), new Among('ar\u00E1n', -1, 2), new Among('er\u00E1n', -1, 2), new Among('ir\u00E1n', -1, 2), new Among("ado", -1, 2), new Among("ido", -1, 2), new Among("ando", -1, 2), new Among("iendo", -1, 2), new Among("ar", -1, 2), new Among("er", -1, 2), new Among("ir", -1, 2), new Among("as", -1, 2), new Among("abas", 39, 2), new Among("adas", 39, 2), new Among("idas", 39, 2), new Among("aras", 39, 2), new Among("ieras", 39, 2), new Among('\u00EDas', 39, 2), new Among('ar\u00EDas', 45, 2), new Among('er\u00EDas', 45, 2), new Among('ir\u00EDas', 45, 2), new Among("es", -1, 1), new Among("ases", 49, 2), new Among("ieses", 49, 2), new Among("abais", -1, 2), new Among("arais", -1, 2), new Among("ierais", -1, 2), new Among('\u00EDais', -1, 2), new Among('ar\u00EDais', 55, 2), new Among('er\u00EDais', 55, 2), new Among('ir\u00EDais', 55, 2), new Among("aseis", -1, 2), new Among("ieseis", -1, 2), new Among("asteis", -1, 2), new Among("isteis", -1, 2), new Among('\u00E1is', -1, 2), new Among('\u00E9is', -1, 1), new Among('ar\u00E9is', 64, 2), new Among('er\u00E9is', 64, 2), new Among('ir\u00E9is', 64, 2), new Among("ados", -1, 2), new Among("idos", -1, 2), new Among("amos", -1, 2), new Among('\u00E1bamos', 70, 2), new Among('\u00E1ramos', 70, 2), new Among('i\u00E9ramos', 70, 2), new Among('\u00EDamos', 70, 2), new Among('ar\u00EDamos', 74, 2), new Among('er\u00EDamos', 74, 2), new Among('ir\u00EDamos', 74, 2), new Among("emos", -1, 1), new Among("aremos", 78, 2), new Among("eremos", 78, 2), new Among("iremos", 78, 2), new Among('\u00E1semos', 78, 2), new Among('i\u00E9semos', 78, 2), new Among("imos", -1, 2), new Among('ar\u00E1s', -1, 2), new Among('er\u00E1s', -1, 2), new Among('ir\u00E1s', -1, 2), new Among('\u00EDs', -1, 2), new Among('ar\u00E1', -1, 2), new Among('er\u00E1', -1, 2), new Among('ir\u00E1', -1, 2), new Among('ar\u00E9', -1, 2), new Among('er\u00E9', -1, 2), new Among('ir\u00E9', -1, 2), new Among('i\u00F3', -1, 2)];
+            }
+        }, {
+            key: 'a_9',
+            get: function get() {
+                delete spanishStemmer.a_9;
+                return spanishStemmer.a_9 = [new Among("a", -1, 1), new Among("e", -1, 2), new Among("o", -1, 1), new Among("os", -1, 1), new Among('\u00E1', -1, 1), new Among('\u00E9', -1, 2), new Among('\u00ED', -1, 1), new Among('\u00F3', -1, 1)];
+            }
+        }, {
+            key: 'g_v',
+            get: function get() {
+                delete spanishStemmer.g_v;
+                return spanishStemmer.g_v = [17, 65, 16, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 17, 4, 10];
+            }
+        }]);
+
+        return spanishStemmer;
+    }(SnowballStemmer);
+
     function newStemmer(lng) {
         var stemMap = {
             english: englishStemmer,
-            russian: russianStemmer
+            russian: russianStemmer,
+            german: germanStemmer,
+            french: frenchStemmer,
+            spanish: spanishStemmer,
+            portuguese: portugueseStemmer
         };
         var stemmer = new stemMap[lng.toLowerCase()]();
         return {
@@ -2770,8 +6687,8 @@ Wordbook.Snowball = (function () {
     }
 
     function algorithms() {
-        return ['english', 'russian'];
+        return ['english', 'russian', 'german', 'french', 'spanish', 'portuguese'];
     }
-})(exports);
+  })(exports);
   return exports;
 })();

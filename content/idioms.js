@@ -28,16 +28,7 @@ Wordbook.Idioms = {
     n: "составное существительное",
   },
 
-  init() {
-    try {
-      const raw = Zotero.File.getContentsFromURL("chrome://wordbook/content/data/idioms.json");
-      this.load(JSON.parse(raw));
-    } catch (e) {
-      Wordbook.log("Idioms.init: " + e);
-    }
-    Wordbook.log(`Выражений загружено: ${this.map.size}`);
-  },
-
+  // The database comes with the English → Russian pack (see Packs._attach)
   load(obj) {
     this.map = new Map(Object.entries(obj));
     this.vocab = new Set();

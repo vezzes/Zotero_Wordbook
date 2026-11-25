@@ -5,6 +5,7 @@ pref("extensions.zotero.wordbook.highlightColor", "#ffc800"); // hex or rgba(...
 pref("extensions.zotero.wordbook.highlightOpacity", 40); // % (for hex)
 pref("extensions.zotero.wordbook.hoverDelay", 250);
 pref("extensions.zotero.wordbook.maxSelectionWords", 8); // longer — we treat it as not a word/expression
+pref("extensions.zotero.wordbook.packsUrl", ""); // address of the dictionary packs; empty = the project release on GitHub
 pref("extensions.zotero.wordbook.ankiUrl", "http://127.0.0.1:8765");
 pref("extensions.zotero.wordbook.ankiDeck", "Zotero Wordbook");
 pref("extensions.zotero.wordbook.ankiModel", "Zotero Wordbook");

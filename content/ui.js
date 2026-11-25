@@ -106,7 +106,9 @@ Wordbook.UI = {
       const r = await Wordbook.Anki.exportPending();
       if (!r.total && !r.updated) return Wordbook.notify("Нет новых слов для экспорта");
       Wordbook.notify(
-        `Добавлено в Anki: ${r.added}. Уже были в Anki: ${r.duplicates}.` +
+        `Добавлено в Anki: ${r.added}.` +
+          (r.replaced ? ` Заменено дублей: ${r.replaced}.` : "") +
+          (r.duplicates ? ` Уже были в Anki: ${r.duplicates}.` : "") +
           (r.updated ? ` Дополнен контекст у ранее выгруженных: ${r.updated}.` : "") +
           (r.noContext ? ` Без контекста: ${r.noContext} (при добавлении слова предложение не сохранилось).` : "") +
           (r.failed ? ` Не удалось: ${r.failed}.` : "")

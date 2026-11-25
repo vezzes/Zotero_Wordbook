@@ -10,12 +10,12 @@ Sources:
     expressions for recognising phrasal verbs and idioms.
   • tools/idioms-curated.tsv — hand-curated list of common expressions with Russian equivalents.
 
-Output: content/data/dict-basic.json, content/data/idioms.json
+Output: packs-src/en-ru/dict-basic.json, packs-src/en-ru/idioms.json (tools/build_packs.py packs them)
 """
 import csv, json, os, re, sys, collections
 
 HERE = os.path.dirname(os.path.abspath(__file__))
-OUT = os.path.join(HERE, '..', 'content', 'data')
+OUT = os.path.join(HERE, '..', 'packs-src', 'en-ru')
 csv.field_size_limit(10**9)
 
 def build_dict(src):

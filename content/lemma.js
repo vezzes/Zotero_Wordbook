@@ -61,31 +61,28 @@
     },
 
     // Russian base form for a word form («книге» → «книга», «читали» → «читать»).
-    // The list of base forms is taken from the Russian translations of the built-in dictionary; the form is chosen by common stem
+    // The list of base forms is taken from the headwords of the downloaded Russian pack (ru → …); the form is chosen by common stem
     // (Snowball) and the longest common beginning. null — the word is already a base form or no suitable one was found.
-    _ruIdx: null,
     ruBase(word) {
       const w = String(word).toLowerCase().replace(/ё/g, "е");
-      if (!/^[а-я]{4,}$/.test(w) || !Wordbook.Dict?.basic?.size) return null;
-      if (!this._ruIdx) {
+      const pack = Wordbook.Packs?.current();
+      if (!/^[а-я]{4,}$/.test(w) || !pack || pack.src !== "ru") return null;
+      if (!pack._ruIdx) {
         const idx = new Map();
         const all = new Set();
-        for (const v of Wordbook.Dict.basic.values()) {
-          for (const it of v.split("|")) {
-            for (const p of it.split(" / ")) {
-              const l = p.trim().toLowerCase();
-              if (/^[а-яё]{3,}$/.test(l) && !all.has(l.replace(/ё/g, "е"))) {
-                all.add(l.replace(/ё/g, "е"));
-                const st = Wordbook.Morph.stem(l, "ru");
-                if (!idx.has(st)) idx.set(st, []);
-                idx.get(st).push(l);
-              }
-            }
+        for (const [key, val] of pack.entries) {
+          if (String(val).startsWith("→")) continue; // inflected forms are not base forms
+          const l = key.toLowerCase();
+          if (/^[а-яё]{3,}$/.test(l) && !all.has(l.replace(/ё/g, "е"))) {
+            all.add(l.replace(/ё/g, "е"));
+            const st = Wordbook.Morph.stem(l, "ru");
+            if (!idx.has(st)) idx.set(st, []);
+            idx.get(st).push(l);
           }
         }
-        this._ruIdx = { idx, all };
+        pack._ruIdx = { idx, all };
       }
-      const { idx, all } = this._ruIdx;
+      const { idx, all } = pack._ruIdx;
       const yo = (x) => x.replace(/ё/g, "е");
       if (all.has(w)) return null; // already a base form
       let best = null;

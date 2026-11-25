@@ -3,19 +3,34 @@
   <label><html:h2>Языки</html:h2></label>
   <description>
     Язык книги — на нём написан читаемый PDF; подсвечиваются только слова этого языка. Язык перевода — на который переводить.
-    Их же можно быстро сменить кнопками в верхней панели читалки. Встроенный офлайн-словарь и база идиом работают только для направления
-    «английский → русский»; для «русский → английский» нужен онлайн-перевод.
+    Их же можно быстро сменить кнопками в верхней панели читалки. Доступны английский, китайский, немецкий, французский, испанский,
+    португальский и русский — в любую сторону. Онлайн-перевод работает для любой пары; для работы без интернета скачайте офлайн-словарь ниже.
   </description>
   <hbox align="center">
     <label value="Язык книги:"/>
     <menulist preference="extensions.zotero.wordbook.sourceLang">
-      <menupopup><menuitem label="Английский" value="en"/><menuitem label="Русский" value="ru"/></menupopup>
+      <menupopup><menuitem label="Английский" value="en"/><menuitem label="Китайский" value="zh"/><menuitem label="Немецкий" value="de"/><menuitem label="Французский" value="fr"/><menuitem label="Испанский" value="es"/><menuitem label="Португальский" value="pt"/><menuitem label="Русский" value="ru"/></menupopup>
     </menulist>
     <label value="Перевод на:"/>
     <menulist preference="extensions.zotero.wordbook.targetLang">
-      <menupopup><menuitem label="Английский" value="en"/><menuitem label="Русский" value="ru"/></menupopup>
+      <menupopup><menuitem label="Английский" value="en"/><menuitem label="Китайский" value="zh"/><menuitem label="Немецкий" value="de"/><menuitem label="Французский" value="fr"/><menuitem label="Испанский" value="es"/><menuitem label="Португальский" value="pt"/><menuitem label="Русский" value="ru"/></menupopup>
     </menulist>
   </hbox>
+</groupbox>
+
+<groupbox>
+  <label><html:h2>Офлайн-словари</html:h2></label>
+  <description>
+    Словари не входят в плагин: скачайте только нужные. Один словарь — одно направление (например, «Немецкий → Английский»), для
+    обратного направления нужен отдельный. После скачивания слова переводятся без интернета; словарь хранится в папке данных Zotero
+    и его можно удалить в любой момент. Для английского → русского в словарь входит и база идиом. Нужного направления в списке нет —
+    пока работает только онлайн-перевод.
+  </description>
+  <hbox align="center">
+    <button id="wordbook-packs-refresh" label="Обновить список"/>
+    <label id="wordbook-packs-status" value=""/>
+  </hbox>
+  <vbox id="wordbook-packs-list"></vbox>
 </groupbox>
 
 <groupbox>

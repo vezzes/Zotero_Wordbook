@@ -114,7 +114,7 @@ Wordbook.PdfText = {
     let s = base === 0 ? 0 : start; // if the sentence is longer than the window, start at the selection
     const before = text.slice(base, start);
     let found = false;
-    for (const m of before.matchAll(/[.!?…]["'”’)\]]*\s+/g)) {
+    for (const m of before.matchAll(/(?:[.!?…]["'”’)\]]*\s+|[。！？]+[”’」』）)]*)/g)) {
       s = base + m.index + m[0].length;
       found = true;
     }
@@ -122,7 +122,7 @@ Wordbook.PdfText = {
 
     let e;
     const after = text.slice(end, end + WINDOW);
-    const m2 = /[.!?…]["'”’)\]]*(?=\s|$)/.exec(after);
+    const m2 = /(?:[.!?…]["'”’)\]]*(?=\s|$)|[。！？]+[”’」』）)]*)/.exec(after);
     e = m2 ? end + m2.index + m2[0].length : Math.min(text.length, end + WINDOW);
 
     let sentence = text.slice(s, e).replace(/\s+/g, " ").trim();
@@ -165,8 +165,8 @@ Wordbook.PdfText = {
       if (!range) return { before: "", after: "" };
       let before = built.text.slice(Math.max(0, range[0] - nBefore), range[0]);
       let after = built.text.slice(range[1], range[1] + nAfter);
-      if (range[0] - nBefore > 0) before = before.replace(/^[^.!?…]*[.!?…]["'”’)\]]*\s+/, ""); // start with a whole sentence
-      if (built.text.length > range[1] + nAfter) after = after.replace(/\s+[^.!?…]*$/, (m) => (/[.!?…]/.test(m) ? m : "")); // don't cut off mid-word
+      if (range[0] - nBefore > 0) before = before.replace(/^[^.!?…。！？]*(?:[.!?…]["'”’)\]]*\s+|[。！？]+[”’」』）)]*)/, ""); // start with a whole sentence
+      if (built.text.length > range[1] + nAfter) after = after.replace(/\s+[^.!?…。！？]*$/, (m) => (/[.!?…。！？]/.test(m) ? m : "")); // don't cut off mid-word
       return { before: before.replace(/\s+/g, " ").trim(), after: after.replace(/\s+/g, " ").trim() };
     } catch (e) {
       Wordbook.log("surroundFor: " + e);

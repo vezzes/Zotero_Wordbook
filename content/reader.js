@@ -227,7 +227,7 @@ Wordbook.Reader = {
   },
 
   _analyze(st) {
-    if (Wordbook.Translator.offlineSupported) st.base = this._baseForm(st.text); // base-form rules — for English
+    if (Wordbook.Translator.enRu) st.base = this._baseForm(st.text); // base-form rules — for English
     else {
       // Russian: base form from the dictionary word list, translation — online
       const ru = Wordbook.langs().src === "ru" && /^[\p{L}ё]+$/u.test(st.text.trim()) ? Wordbook.Lemma.ruBase(st.text.trim()) : null;
@@ -235,7 +235,7 @@ Wordbook.Reader = {
     }
     const view = st.reader._internalReader?._primaryView;
     st.context = Wordbook.PdfText.contextFor(view, st.annotation);
-    st.idioms = Wordbook.Translator.offlineSupported ? Wordbook.Idioms.analyze(st.text, st.context) : {}; // the idiom database is English
+    st.idioms = Wordbook.Translator.enRu ? Wordbook.Idioms.analyze(st.text, st.context) : {}; // the idiom database is English
 
     try {
       st.off = Wordbook.Translator.offline(st.text);
@@ -243,6 +243,10 @@ Wordbook.Reader = {
     } catch (e) {
       st.off = null;
       st.offError = e;
+    }
+    // Another form of the word found in a pack: offer the base form (with its translation) like the English rules do
+    if (!st.base && st.off?.source === "pack" && st.off.form === "lemma" && st.off.headword && Wordbook.normalize(st.off.headword) !== Wordbook.normalize(st.text)) {
+      st.base = { word: st.off.headword, translation: st.off.text };
     }
 
     if (!Wordbook.Translator.onlineEnabled) {
@@ -403,7 +407,7 @@ Wordbook.Reader = {
       } else if (st.offError?.code === "NO_OFFLINE" && st.onl === "error") {
         kids.push(el("div", "opacity:.85;", "Не удалось перевести онлайн."));
       } else if (st.offError?.code === "NO_OFFLINE") {
-        kids.push(el("div", "opacity:.85;", "Для этой пары языков нужен онлайн-перевод."));
+        kids.push(el("div", "opacity:.85;", "Нужен онлайн-перевод или офлайн-словарь для этой пары (Настройки → Wordbook → Офлайн-словари)."));
       } else if (st.offError?.code === "NOT_FOUND") {
         kids.push(el("div", "opacity:.85;", "Точного перевода нет в офлайн-словаре."));
       } else {

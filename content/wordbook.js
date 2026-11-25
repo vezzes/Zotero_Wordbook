@@ -12,17 +12,26 @@ Wordbook = {
   async init({ id, version, rootURI }) {
     Object.assign(this, { id, version, rootURI });
     await this.Store.init(); // 1. data
-    await this.Dict.init(); //   offline dictionary
-    this.Idioms.init(); //       database of idioms and phrasal verbs
+    await this.Dict.init(); //   the dictionary loaded by the user (StarDict)
+    await this.Packs.init(); //  offline dictionary packs downloaded by the user
     Zotero.Wordbook = this; //   access from the settings pane
+    // The languages can also be changed in the settings pane (not only with setLang): reload the pack and redraw
+    this._langObservers = ["wordbook.sourceLang", "wordbook.targetLang"].map((k) =>
+      Zotero.Prefs.registerObserver(k, () => {
+        this.Packs.prepare();
+        this.emit("words-changed");
+      })
+    );
     this.Highlighter.init(); // 2. highlighting (builds a regex from the dictionary)
     this.Reader.init(); //      3. subscription to the Zotero reader
   },
 
   shutdown() {
+    for (const o of this._langObservers || []) Zotero.Prefs.unregisterObserver(o);
     delete Zotero.Wordbook;
     this.Reader.shutdown();
     this.Highlighter.shutdown();
+    this.Packs.shutdown();
     this.Store.shutdown();
     this._listeners = {};
   },
@@ -36,17 +45,25 @@ Wordbook = {
   },
 
   // ---------- languages ----------
-  // Book language (src) and translation language (dst). en and ru are supported (in both directions).
+  // Book language (src) and translation language (dst): any two of the seven languages below.
+  //   name   — the name in the interface (Russian), prompt — the name for translation models,
+  //   google / ms — language codes of Google Translate and Microsoft Translator,
+  //   sample — a word and a sentence for the «Check connection» button in the settings.
   LANGS: {
-    en: { name: "Английский", short: "EN" },
-    ru: { name: "Русский", short: "RU" },
+    en: { name: "Английский", short: "EN", prompt: "English", google: "en", ms: "en", sample: ["break the ice", "She told a joke to break the ice at the meeting."] },
+    zh: { name: "Китайский", short: "ZH", prompt: "Chinese (Simplified, Mandarin)", google: "zh-CN", ms: "zh-Hans", sample: ["打破僵局", "他讲了个笑话来打破会议上的僵局。"] },
+    de: { name: "Немецкий", short: "DE", prompt: "German", google: "de", ms: "de", sample: ["das Eis brechen", "Er erzählte einen Witz, um das Eis zu brechen."] },
+    fr: { name: "Французский", short: "FR", prompt: "French", google: "fr", ms: "fr", sample: ["briser la glace", "Il a raconté une blague pour briser la glace."] },
+    es: { name: "Испанский", short: "ES", prompt: "Spanish", google: "es", ms: "es", sample: ["romper el hielo", "Contó un chiste para romper el hielo."] },
+    pt: { name: "Португальский", short: "PT", prompt: "Portuguese", google: "pt", ms: "pt", sample: ["quebrar o gelo", "Ele contou uma piada para quebrar o gelo."] },
+    ru: { name: "Русский", short: "RU", prompt: "Russian", google: "ru", ms: "ru", sample: ["разбить лёд", "Он рассказал шутку, чтобы разбить лёд."] },
   },
   langs() {
     let src = String(this.getPref("sourceLang") || "en");
     let dst = String(this.getPref("targetLang") || "ru");
     if (!this.LANGS[src]) src = "en";
     if (!this.LANGS[dst]) dst = "ru";
-    if (src === dst) dst = Object.keys(this.LANGS).find((l) => l !== src);
+    if (src === dst) dst = src === "ru" ? "en" : "ru";
     return { src, dst };
   },
   // Change the book / translation language (if the same language is chosen, the two languages are swapped)
@@ -60,6 +77,7 @@ Wordbook = {
       this.setPref("targetLang", value);
       this.setPref("sourceLang", cur.src === value ? cur.dst : cur.src);
     }
+    this.Packs.prepare(); // the offline dictionary of the new pair is loaded (and announces itself)
     this.emit("words-changed"); // the highlight depends on the book language
   },
 
@@ -105,6 +123,8 @@ Wordbook = {
   isCandidate(text) {
     const key = this.normalize(text);
     if (!key || key.length > 80 || !/\p{L}/u.test(key)) return false;
+    // Chinese has no spaces between words: the limit is on the number of characters
+    if (this.langs().src === "zh") return key.length <= 16;
     return key.split(" ").length <= (this.getPref("maxSelectionWords") || 6);
   },
 

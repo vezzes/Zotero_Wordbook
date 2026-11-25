@@ -31,6 +31,7 @@ async function startup({ id, version, rootURI }) {
     "lemma.js",
     "dict.js",
     "idioms.js",
+    "packs.js",
     "translator.js",
     "pdf-text.js",
     "highlighter.js",

@@ -6,8 +6,9 @@
 // Duplicate protection — two levels:
 //  1) locally: after export the entry gets entry.anki and no longer enters the queue;
 //  2) in Anki itself: addNotes with allowDuplicate:false. If the word is already there (for example,
-//     added manually or from another Zotero installation), the note is not created and the entry
-//     is marked as exported with anki.duplicate = true.
+//     added manually or from another Zotero installation), it is not duplicated: the existing note
+//     is found (scan of the note type, compared as plain text) and REPLACED automatically with the fresh
+//     translation/context/source (the Audio field is kept); one duplicate never blocks the export.
 // The first note field (Word) is the normalized key, so "Run" and "run" count as the same word.
 
 Wordbook.Anki = {
@@ -206,10 +207,49 @@ Wordbook.Anki = {
     return ids?.[0] ?? null;
   },
 
-  // Export all words not yet exported. Returns { total, added, duplicates, failed }
+  // Strips HTML and normalizes a Word field the way Anki's duplicate check sees it
+  _plain(s) {
+    return String(s ?? "")
+      .replace(/<[^>]*>/g, "")
+      .replace(/&nbsp;/g, " ")
+      .replace(/&amp;/g, "&")
+      .replace(/\s+/g, " ")
+      .trim()
+      .toLowerCase();
+  },
+
+  // Map "plain word" -> note id for every note of our note type (any deck)
+  async _existingMap() {
+    const map = new Map();
+    const model = Wordbook.getPref("ankiModel");
+    const ids = await this.invoke("findNotes", { query: `"note:${this._q(model)}"` });
+    for (let i = 0; i < (ids || []).length; i += 500) {
+      const infos = await this.invoke("notesInfo", { notes: ids.slice(i, i + 500) });
+      for (const n of infos || []) {
+        const w = this._plain(n?.fields?.Word?.value);
+        if (w && !map.has(w)) map.set(w, n.noteId);
+      }
+    }
+    return map;
+  },
+
+  // Replaces the content of an existing note with the fresh data (the Audio field is left untouched)
+  async _replace(noteId, entry, ctx) {
+    const note = this._toNote(entry, ctx);
+    const { Audio, ...fields } = note.fields; // eslint-disable-line no-unused-vars
+    await this.invoke("updateNoteFields", { note: { id: noteId, fields } });
+    try {
+      await this.invoke("addTags", { notes: [noteId], tags: note.tags.join(" ") });
+    } catch (e) {
+      Wordbook.log("addTags: " + e);
+    }
+  },
+
+  // Export all words not yet exported. A word that already exists in Anki is replaced automatically.
+  // Returns { total, added, replaced, duplicates, failed, updated, noContext }
   async exportPending() {
     const entries = Wordbook.Store.pendingAnki();
-    const summary = { total: entries.length, added: 0, duplicates: 0, failed: 0, updated: 0, noContext: 0 };
+    const summary = { total: entries.length, added: 0, replaced: 0, duplicates: 0, failed: 0, updated: 0, noContext: 0 };
     const needSync = Wordbook.Store.all().some((e) => e.anki?.noteId && !e.anki.duplicate && !e.anki.contextSynced && e.context);
     if (!entries.length && !needSync) return summary;
 
@@ -218,19 +258,72 @@ Wordbook.Anki = {
     if (!entries.length) return summary;
     summary.noContext = entries.filter((e) => !String(e.context || "").trim()).length;
     const ctxs = await this._contexts(entries);
-    const ids = await this.invoke("addNotes", { notes: entries.map((e) => this._toNote(e, ctxs.get(e.key))) });
 
-    for (let i = 0; i < entries.length; i++) {
-      const entry = entries[i];
-      if (ids[i]) {
-        Wordbook.Store.markExported(entry.key, ids[i]);
+    let existing = new Map();
+    try {
+      existing = await this._existingMap();
+    } catch (e) {
+      Wordbook.log("existing notes scan: " + e);
+    }
+
+    const replaceOne = async (entry) => {
+      const id = existing.get(this._plain(entry.word || entry.key)) ?? existing.get(this._plain(entry.key));
+      if (!id) return false;
+      try {
+        await this._replace(id, entry, ctxs.get(entry.key));
+        Wordbook.Store.markExported(entry.key, id, { duplicate: true });
+        summary.replaced++;
+        return true;
+      } catch (e) {
+        Wordbook.log("replace failed: " + e);
+        return false;
+      }
+    };
+
+    const fresh = [];
+    for (const entry of entries) {
+      if (!(await replaceOne(entry))) fresh.push(entry);
+    }
+
+    const addOne = async (entry) => {
+      try {
+        const id = await this.invoke("addNote", { note: this._toNote(entry, ctxs.get(entry.key)) });
+        return id || null;
+      } catch (e) {
+        Wordbook.log("addNote failed: " + e);
+        return null;
+      }
+    };
+
+    let ids = null;
+    if (fresh.length) {
+      try {
+        ids = await this.invoke("addNotes", { notes: fresh.map((e) => this._toNote(e, ctxs.get(e.key))) });
+      } catch (e) {
+        Wordbook.log("addNotes failed, adding one by one: " + e);
+      }
+    }
+
+    for (let i = 0; i < fresh.length; i++) {
+      const entry = fresh[i];
+      let id = ids ? ids[i] : await addOne(entry);
+      if (id) {
+        Wordbook.Store.markExported(entry.key, id);
         summary.added++;
         continue;
       }
-      // null => Anki refused (most likely a duplicate): look for the existing note
-      const existing = await this._findExisting(entry.word || entry.key);
-      if (existing) {
-        Wordbook.Store.markExported(entry.key, existing, { duplicate: true });
+      // refused (duplicate that the first scan did not see): rescan and replace, never block the rest
+      try {
+        existing = await this._existingMap();
+      } catch (e) {
+        existing = new Map();
+      }
+      if (await replaceOne(entry)) continue;
+      const found = await this._findExisting(entry.word || entry.key).catch(() => null);
+      if (found) {
+        existing.set(this._plain(entry.word || entry.key), found);
+        if (await replaceOne(entry)) continue;
+        Wordbook.Store.markExported(entry.key, found, { duplicate: true });
         summary.duplicates++;
       } else {
         summary.failed++;

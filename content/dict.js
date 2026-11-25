@@ -12,7 +12,7 @@
 
 Wordbook.Dict = {
   entries: new Map(), // user-loaded StarDict dictionary: key -> article text (optional)
-  basic: new Map(), // built-in basic dictionary: key -> "word / aspect|word|…"
+  basic: new Map(), // the English → Russian pack (filled by Packs): key -> "word / aspect|word|…"
   name: "",
   _path: null,
 
@@ -21,14 +21,7 @@ Wordbook.Dict = {
   },
 
   async init() {
-    // 1. built-in basic dictionary (works right after installation)
-    try {
-      const raw = Zotero.File.getContentsFromURL("chrome://wordbook/content/data/dict-basic.json");
-      this.basic = new Map(Object.entries(JSON.parse(raw)));
-    } catch (e) {
-      Wordbook.log("Dict.init (встроенный): " + e);
-    }
-    // 2. dictionary loaded by the user (optional, takes priority over the built-in one)
+    // the dictionary loaded by the user (optional, takes priority over the English → Russian pack)
     this._path = PathUtils.join(Zotero.DataDirectory.dir, "wordbook", "dictionary.json");
     try {
       if (await IOUtils.exists(this._path)) {
@@ -37,7 +30,7 @@ Wordbook.Dict = {
     } catch (e) {
       Wordbook.log("Dict.init (пользовательский): " + e);
     }
-    Wordbook.log(`Словарь: встроенный ${this.basic.size}, загруженный «${this.name}» ${this.entries.size}`);
+    Wordbook.log(`Словарь, загруженный пользователем: «${this.name}», ${this.entries.size}`);
   },
 
   _fill(data) {
