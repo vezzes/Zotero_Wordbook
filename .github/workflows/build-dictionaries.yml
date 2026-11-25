@@ -1,0 +1,24 @@
+name: Build dictionaries
+# Builds the offline dictionary packs from open sources and publishes them as assets of the release tagged "dictionaries"
+# (the plugin downloads catalog.json and the packs from there). Run it manually: Actions → Build dictionaries → Run workflow.
+on:
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Build packs
+        run: python3 tools/build_packs.py --out dist-packs
+      - name: Publish release "dictionaries"
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh release view dictionaries >/dev/null 2>&1 || gh release create dictionaries --title "Dictionaries" \
+            --notes "Offline dictionary packs for the Zotero Wordbook plugin (downloaded from the plugin settings). Rebuilt by the Build dictionaries workflow."
+          gh release upload dictionaries dist-packs/*.json --clobber
